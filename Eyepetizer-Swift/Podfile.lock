@@ -1,0 +1,36 @@
+PODS:
+  - Alamofire (4.3.0)
+  - CSSwiftExtension (0.1.2)
+  - Hero (0.1.8)
+  - Kingfisher (3.3.4)
+  - RxCocoa (3.2.0):
+    - RxSwift (~> 3.1)
+  - RxDataSources (1.0.2):
+    - RxCocoa (~> 3.0)
+    - RxSwift (~> 3.0)
+  - RxSwift (3.2.0)
+  - SwiftyJSON (3.1.4)
+
+DEPENDENCIES:
+  - Alamofire
+  - CSSwiftExtension
+  - Hero
+  - Kingfisher
+  - RxCocoa
+  - RxDataSources
+  - RxSwift
+  - SwiftyJSON
+
+SPEC CHECKSUMS:
+  Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
+  CSSwiftExtension: ce51f26219314df00002b7cba28ab0b3d53234cb
+  Hero: 801137d01690792d231184aea6d7fae6abcc9cdf
+  Kingfisher: 35f289f015d26e81ea6c85048718c6205f3933c6
+  RxCocoa: ccdf43101a70407097a29082f648ba1676075b30
+  RxDataSources: 1de77880bf5b7fcee42102adcd5a5d65e5b81541
+  RxSwift: 46574f70d416b7923c237195939cc488a7fbf3a0
+  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+
+PODFILE CHECKSUM: 28be4065f6fcd5e88a4bab88beff2459a388cb0e
+
+COCOAPODS: 1.2.0.beta.1

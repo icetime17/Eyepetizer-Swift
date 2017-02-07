@@ -1,0 +1,6 @@
+framework module Pods_Eyepetizer_SwiftTests {
+  umbrella header "Pods-Eyepetizer-SwiftTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
