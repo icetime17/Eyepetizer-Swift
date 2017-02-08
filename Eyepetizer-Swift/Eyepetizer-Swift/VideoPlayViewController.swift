@@ -41,6 +41,12 @@ class VideoPlayViewController: UIViewController {
     @IBOutlet weak var sliderPlayProgress: UISlider!
     @IBOutlet weak var lbPlayProgress: UILabel!
     
+    var heroTransitionID: String? {
+        didSet {
+            self.isHeroEnabled = true
+        }
+    }
+    
     deinit {
         print("deinit VideoPlayViewController")
     }
@@ -58,9 +64,16 @@ extension VideoPlayViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        videoCover.heroID = heroTransitionID
+        
         addNotification()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        viewVideoNetworkOperation.isHidden = false
+    }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
