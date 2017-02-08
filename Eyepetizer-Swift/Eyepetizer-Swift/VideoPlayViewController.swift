@@ -16,8 +16,9 @@ class VideoPlayViewController: UIViewController {
     
     var video: ModelVideo!
     var videoURLString = ""
-    var avPlayerVC: AVPlayerViewController!
+    
     var avPlayer: AVPlayer!
+    var avPlayerItem: AVPlayerItem!
     
     var isVideoPlaying = false
     var isOperationShowing = true
@@ -111,6 +112,7 @@ extension VideoPlayViewController {
         btnBack.rx.tap
             .subscribe(
                 onNext: { [weak self] in
+                    self?.actionStopPlaying()
                     self?.dismiss(animated: true, completion: nil)
                 }
             )
@@ -173,7 +175,7 @@ extension VideoPlayViewController {
             let videoURL = URL(string: videoURLString)
             
             // info of video
-            let avPlayerItem = AVPlayerItem(url: videoURL!)
+            avPlayerItem = AVPlayerItem(url: videoURL!)
             // use status to check whether can be played now.
             // video can be played once received AVPlayerStatusReadyToPlay
             // loadedTimeRanges means caching progress which can be monitored using KVO
@@ -182,20 +184,21 @@ extension VideoPlayViewController {
             avPlayer = AVPlayer(playerItem: avPlayerItem)
             
             // monitor video playing progress
-            avPlayer.addPeriodicTimeObserver(forInterval: CMTime(value: 1, timescale: 1), queue: DispatchQueue.main, using: { (time) in
+            avPlayer.addPeriodicTimeObserver(forInterval: CMTime(value: 1, timescale: 1), queue: DispatchQueue.main, using: { [weak self] (time) in
+                guard let strongSelf = self else { return }
                 
-                let total = lroundf(Float(CMTimeGetSeconds(avPlayerItem.duration)))
+                let total = lroundf(Float(CMTimeGetSeconds(strongSelf.avPlayerItem.duration)))
                 let current = lroundf(Float(CMTimeGetSeconds(time)))
                 if current > 0 {
-                    self.sliderPlayProgress.value = Float(current) / Float(total)
+                    strongSelf.sliderPlayProgress.value = Float(current) / Float(total)
                     
-                    self.lbPlayProgress.text = self.timeString(total - current)
+                    strongSelf.lbPlayProgress.text = strongSelf.timeString(total - current)
                 }
                 
                 // also can use notification AVPlayerItemDidPlayToEndTime
-                if self.sliderPlayProgress.value == 1 {
-                    self.btnPlayVideoNetwork.setImage(UIImage(named: "btnPlay"), for: .normal)
-                    self.sliderPlayProgress.value = 0
+                if strongSelf.sliderPlayProgress.value == 1 {
+                    strongSelf.btnPlayVideoNetwork.setImage(UIImage(named: "btnPlay"), for: .normal)
+                    strongSelf.sliderPlayProgress.value = 0
                 }
                 
             })
@@ -259,8 +262,12 @@ extension VideoPlayViewController {
     }
     
     fileprivate func actionStopPlaying() {
-        avPlayer.pause()
-        
+        if avPlayer != nil {
+            avPlayer.pause()
+            avPlayer = nil
+            
+            avPlayerItem.removeObserver(self, forKeyPath: "loadedTimeRanges", context: nil)
+        }
     }
     
     func actionTapGesture(_ sender: UITapGestureRecognizer) {
@@ -285,16 +292,19 @@ extension VideoPlayViewController {
 // MARK: - Use KVO to monitor cache progress
 extension VideoPlayViewController {
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        guard let keyPath = keyPath else { return }
         
-        let loadedTimeRanges = avPlayer.currentItem?.loadedTimeRanges
-        guard let timeRange = loadedTimeRanges?.first else { return }// cache range
-        let cmTimeRange = timeRange as CMTimeRange
-        let start = cmTimeRange.start
-        let duration = cmTimeRange.duration
-        let loading = lroundf(Float(start.value) + Float(duration.value))
-        let total = lroundf(Float(CMTimeGetSeconds((avPlayer.currentItem?.duration)!)))
-        
-        progressViewVideoNetworkLoading.progress = Float(loading) / Float(total)
+        if keyPath == "loadedTimeRanges" {
+            let loadedTimeRanges = avPlayer.currentItem?.loadedTimeRanges
+            guard let timeRange = loadedTimeRanges?.first else { return }// cache range
+            let cmTimeRange = timeRange as CMTimeRange
+            let start = cmTimeRange.start
+            let duration = cmTimeRange.duration
+            let loading = lroundf(Float(start.value) + Float(duration.value))
+            let total = lroundf(Float(CMTimeGetSeconds((avPlayer.currentItem?.duration)!)))
+            
+            progressViewVideoNetworkLoading.progress = Float(loading) / Float(total)
+        }
         
     }
 }
