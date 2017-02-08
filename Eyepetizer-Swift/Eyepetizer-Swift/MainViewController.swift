@@ -63,6 +63,20 @@ class MainViewController: UIViewController {
             }, onError: nil, onCompleted: nil, onDisposed: nil)
             .addDisposableTo(CS_DisposeBag)
         
+        tableView.rx.contentOffset
+            .map { $0.y }
+            .subscribe(onNext: { (contentOffset) in
+                print(contentOffset)
+                if contentOffset >= -UIApplication.shared.statusBarFrame.height / 2 {
+                    print("light")
+                    UIApplication.shared.statusBarStyle = .lightContent
+                } else {
+                    print("default")
+                    UIApplication.shared.statusBarStyle = .default
+                }
+            })
+            .addDisposableTo(CS_DisposeBag)
+        
     }
 
 }
