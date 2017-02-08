@@ -18,6 +18,7 @@
 		A4E9F3B71E499AFE00818627 /* ModelVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E9F3B61E499AFE00818627 /* ModelVideo.swift */; };
 		A4E9F3B91E499CDB00818627 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E9F3B81E499CDB00818627 /* Global.swift */; };
 		A4E9F3BB1E49A57900818627 /* VideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E9F3BA1E49A57900818627 /* VideoTableViewCell.swift */; };
+		A4E9F3BF1E4AE56A00818627 /* VideoPlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E9F3BE1E4AE56A00818627 /* VideoPlayViewController.swift */; };
 		EF5A7A8766F3530E779300DC /* Pods_Eyepetizer_SwiftTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66147D3D7CBBCEAA467E1FF3 /* Pods_Eyepetizer_SwiftTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +51,7 @@
 		A4E9F3B61E499AFE00818627 /* ModelVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelVideo.swift; sourceTree = "<group>"; };
 		A4E9F3B81E499CDB00818627 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		A4E9F3BA1E49A57900818627 /* VideoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoTableViewCell.swift; sourceTree = "<group>"; };
+		A4E9F3BE1E4AE56A00818627 /* VideoPlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayViewController.swift; sourceTree = "<group>"; };
 		B11E79766D21BF9FB6F910D2 /* Pods-Eyepetizer-SwiftTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Eyepetizer-SwiftTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Eyepetizer-SwiftTests/Pods-Eyepetizer-SwiftTests.release.xcconfig"; sourceTree = "<group>"; };
 		C1ABEF1638A84E8931D82150 /* Pods-Eyepetizer-SwiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Eyepetizer-SwiftTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Eyepetizer-SwiftTests/Pods-Eyepetizer-SwiftTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -119,6 +121,7 @@
 			children = (
 				A43F2B411E45BCE60096BCB5 /* AppDelegate.swift */,
 				A4E9F3B21E49782E00818627 /* MainViewController.swift */,
+				A4E9F3BE1E4AE56A00818627 /* VideoPlayViewController.swift */,
 				A4E9F3B41E49791900818627 /* ViewModelVideo.swift */,
 				A4E9F3B61E499AFE00818627 /* ModelVideo.swift */,
 				A4E9F3BA1E49A57900818627 /* VideoTableViewCell.swift */,
@@ -347,6 +350,7 @@
 				A4E9F3B31E49782E00818627 /* MainViewController.swift in Sources */,
 				A4E9F3B91E499CDB00818627 /* Global.swift in Sources */,
 				A4E9F3B51E49791900818627 /* ViewModelVideo.swift in Sources */,
+				A4E9F3BF1E4AE56A00818627 /* VideoPlayViewController.swift in Sources */,
 				A4E9F3B71E499AFE00818627 /* ModelVideo.swift in Sources */,
 				A43F2B421E45BCE60096BCB5 /* AppDelegate.swift in Sources */,
 				A4E9F3BB1E49A57900818627 /* VideoTableViewCell.swift in Sources */,

@@ -19,7 +19,7 @@ class MainViewController: UIViewController {
         self.view.addSubview(tableView)
         
         tableView.register(VideoTableViewCell.classForCoder(), forCellReuseIdentifier: "Cell")
-        tableView.rowHeight = 100
+        tableView.rowHeight = 150
         
         return tableView
     }()
@@ -30,7 +30,10 @@ class MainViewController: UIViewController {
     
     let viewModel = ViewModelVideo()
     
-    
+}
+
+extension MainViewController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -59,19 +62,21 @@ class MainViewController: UIViewController {
         // select
         tableView.rx.modelSelected(ModelVideo.self)
             .subscribe(onNext: { (video) in
-                print(video.title)
+                
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let videoPlayVC = storyboard.instantiateViewController(withIdentifier: "VideoPlayViewController") as! VideoPlayViewController
+                videoPlayVC.video = video
+                self.present(videoPlayVC, animated: true, completion: nil)
+                
             }, onError: nil, onCompleted: nil, onDisposed: nil)
             .addDisposableTo(CS_DisposeBag)
         
         tableView.rx.contentOffset
             .map { $0.y }
             .subscribe(onNext: { (contentOffset) in
-                print(contentOffset)
                 if contentOffset >= -UIApplication.shared.statusBarFrame.height / 2 {
-                    print("light")
                     UIApplication.shared.statusBarStyle = .lightContent
                 } else {
-                    print("default")
                     UIApplication.shared.statusBarStyle = .default
                 }
             })
