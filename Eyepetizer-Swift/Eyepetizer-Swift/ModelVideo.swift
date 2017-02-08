@@ -10,11 +10,15 @@ import Foundation
 
 struct ModelVideo {
 
-    let id      : Int
-    let title   : String
-    let playUrl : String
-    let author  : String
-    let coverForFeed: String
+    let id              : Int
+    let title           : String
+    let playUrl         : String
+    let author          : String
+    let coverForFeed    : String
+    let videoDescription: String
+    let category        : String
+    let duration        : Int
+    
 }
 
 

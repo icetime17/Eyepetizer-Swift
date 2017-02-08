@@ -11,10 +11,12 @@ import UIKit
 import AVKit
 import AVFoundation
 
+import CSSwiftExtension
+
 
 class VideoPlayViewController: UIViewController {
     
-    var video: ModelVideo!
+    var modelVideo: ModelVideo!
     var videoURLString = ""
     
     var avPlayer: AVPlayer!
@@ -42,6 +44,14 @@ class VideoPlayViewController: UIViewController {
     @IBOutlet weak var sliderPlayProgress: UISlider!
     @IBOutlet weak var lbPlayProgress: UILabel!
     
+    @IBOutlet weak var lbTitle: UILabel!
+    @IBOutlet weak var lbCategory: UILabel!
+    @IBOutlet weak var textViewDescription: UITextView!
+    
+    @IBOutlet weak var btnMore: UIButton!
+    
+    
+    // Hero
     var heroTransitionID: String? {
         didSet {
             self.isHeroEnabled = true
@@ -49,7 +59,7 @@ class VideoPlayViewController: UIViewController {
     }
     
     deinit {
-        print("deinit VideoPlayViewController")
+        cs_print("deinit")
     }
 }
 
@@ -102,7 +112,11 @@ extension VideoPlayViewController {
 // MARK: - UI
 extension VideoPlayViewController {
     func prepareUI() {
-        videoCover.kf.setImage(with: URL(string: video.coverForFeed))
+        videoCover.kf.setImage(with: URL(string: modelVideo.coverForFeed))
+        
+        lbTitle.text = modelVideo.title
+        lbCategory.text = "#\(modelVideo.category) / \(modelVideo.duration.eyepetizerTimeDuration)"
+        textViewDescription.text = modelVideo.videoDescription
     }
 }
 
@@ -171,7 +185,7 @@ extension VideoPlayViewController {
         
         if avPlayer == nil {
             // video from network
-            videoURLString = video.playUrl
+            videoURLString = modelVideo.playUrl
             let videoURL = URL(string: videoURLString)
             
             // info of video

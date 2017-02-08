@@ -14,6 +14,9 @@ import SwiftyJSON
 import RxSwift
 import RxDataSources
 
+import CSSwiftExtension
+
+
 enum VideoListType {
     case lastest
     case daily
@@ -44,21 +47,31 @@ struct ViewModelVideo {
                     let json = JSON(value)
                     let videoList = json["videoList"].arrayValue
                     for videoJson in videoList {
-                        let id              = videoJson["id"].intValue
-                        let title           = videoJson["title"].stringValue
-                        let playUrl         = videoJson["playUrl"].stringValue
-                        let author          = videoJson["author"].stringValue
-                        let coverForFeed    = videoJson["coverForFeed"].stringValue
-                        let video = ModelVideo(id: id, title: title, playUrl: playUrl, author: author, coverForFeed: coverForFeed)
+                        let id                  = videoJson["id"].intValue
+                        let title               = videoJson["title"].stringValue
+                        let playUrl             = videoJson["playUrl"].stringValue
+                        let author              = videoJson["author"].stringValue
+                        let coverForFeed        = videoJson["coverForFeed"].stringValue
+                        let videoDescription    = videoJson["description"].stringValue
+                        let category            = videoJson["category"].stringValue
+                        let duration            = videoJson["duration"].intValue
+                        let video = ModelVideo(id: id,
+                                               title: title,
+                                               playUrl: playUrl,
+                                               author: author,
+                                               coverForFeed: coverForFeed,
+                                               videoDescription: videoDescription,
+                                               category: category,
+                                               duration: duration)
                         videos.append(video)
                     }
-                    print("getLastestVideoList : \(videos.count)")
+                    cs_print("getLastestVideoList : \(videos.count)")
                     
                     section = [SectionModel(model: "section", items: videos)]
                     observer.onNext(section)
                     observer.onCompleted()
                 case .failure(let error):
-                    print(error)
+                    cs_print(error)
                 }
             })
             
@@ -83,22 +96,32 @@ struct ViewModelVideo {
                     for dailyJson in dailyList {
                         let dailyVideos = dailyJson["videoList"].arrayValue
                         for videoJson in dailyVideos {
-                            let id              = videoJson["id"].intValue
-                            let title           = videoJson["title"].stringValue
-                            let playUrl         = videoJson["playUrl"].stringValue
-                            let author          = videoJson["author"].stringValue
-                            let coverForFeed    = videoJson["coverForFeed"].stringValue
-                            let video = ModelVideo(id: id, title: title, playUrl: playUrl, author: author, coverForFeed: coverForFeed)
+                            let id                  = videoJson["id"].intValue
+                            let title               = videoJson["title"].stringValue
+                            let playUrl             = videoJson["playUrl"].stringValue
+                            let author              = videoJson["author"].stringValue
+                            let coverForFeed        = videoJson["coverForFeed"].stringValue
+                            let videoDescription    = videoJson["description"].stringValue
+                            let category            = videoJson["category"].stringValue
+                            let duration            = videoJson["duration"].intValue
+                            let video = ModelVideo(id: id,
+                                                   title: title,
+                                                   playUrl: playUrl,
+                                                   author: author,
+                                                   coverForFeed: coverForFeed,
+                                                   videoDescription: videoDescription,
+                                                   category: category,
+                                                   duration: duration)
                             videos.append(video)
                         }
                     }
-                    print("getDailyVideoList : \(videos.count)")
+                    cs_print("getDailyVideoList : \(videos.count)")
                     
                     section = [SectionModel(model: "section", items: videos)]
                     observer.onNext(section)
                     observer.onCompleted()
                 case .failure(let error):
-                    print(error)
+                    cs_print(error)
                 }
             })
             

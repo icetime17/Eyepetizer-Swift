@@ -1,2 +1,3 @@
 # Eyepetizer-Swift
-使用Swift3.0写的开眼Eyepetizer
+
+Eyepetizer(开眼) APP using Swift3.0 and RxSwift.

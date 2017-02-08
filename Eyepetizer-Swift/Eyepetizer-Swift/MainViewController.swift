@@ -47,11 +47,7 @@ extension MainViewController {
         // configure
         dataSource.configureCell = { (_, tv, indexPath, video) in
             let cell = tv.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! VideoTableViewCell
-            
-            cell.lbTitle.text = video.title
-            // can not load cover image while using cell's own imageView, don't know why.
-            cell.cover.kf.setImage(with: URL(string: video.coverForFeed))
-            
+            cell.modelVideo = video
             return cell
         }
         
@@ -63,13 +59,13 @@ extension MainViewController {
         
         // select
         tableView.rx.modelSelected(ModelVideo.self)
-            .subscribe(onNext: { (video) in
+            .subscribe(onNext: { (modelVideo) in
                 guard let indexPath = self.tableView.indexPathForSelectedRow else { return }
                 self.tableView.deselectRow(at: indexPath, animated: false)
                 
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let videoPlayVC = storyboard.instantiateViewController(withIdentifier: "VideoPlayViewController") as! VideoPlayViewController
-                videoPlayVC.video = video
+                videoPlayVC.modelVideo = modelVideo
                 
                 let heroTransitionID = "heroTransitionID : videoPlay - \(indexPath.row)"
                 self.tableView.cellForRow(at: indexPath)?.heroID = heroTransitionID
