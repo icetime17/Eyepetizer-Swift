@@ -24,107 +24,123 @@ struct ModelVideo {
 
 /*
  
- {
-     "dataType": "VideoBeanForClientV1",
-     "id": 1818,
-     "title": "布拉格的三天三夜",
-     "description": "拥有「千塔之城」、「金色城市」美称的捷克首都布拉格，有着浓郁的文化气氛和层出不穷的文化活动。一位旅人把在这里三天三夜的记忆转换为了一帧帧美妙的画面。From Yiannis Kostavaras",
-     "provider": {
-        "name": "Vimeo",
-        "alias": "vimeo",
-        "icon": "http://img.kaiyanapp.com/c3ad630be461cbb081649c9e21d6cbe3.png"
-     },
-     "category": "旅行",
-     "author": null,
-     "playUrl": "http://baobab.kaiyanapp.com/api/v1/playUrl?vid=1818&editionType=default&source=ucloud",
-     "duration": 115,
-     "releaseTime": 1437494400000,
-     "playInfo": [
-         {
-            "height": 480,
-            "width": 720,
-            "urlList": [
-                {
-                    "name": "ucloud",
-                    "url": "http://baobab.kaiyanapp.com/api/v1/playUrl?vid=1818&editionType=normal&source=ucloud"
-                },
-                {
-                    "name": "qcloud",
-                    "url": "http://baobab.kaiyanapp.com/api/v1/playUrl?vid=1818&editionType=normal&source=qcloud"
-                }
-            ],
-            "name": "标清",
-            "type": "normal",
-            "url": "http://baobab.kaiyanapp.com/api/v1/playUrl?vid=1818&editionType=normal&source=ucloud"
-        },
-        {
-            "height": 720,
-            "width": 1280,
-            "urlList": [
-                {
-                    "name": "ucloud",
-                    "url": "http://baobab.kaiyanapp.com/api/v1/playUrl?vid=1818&editionType=high&source=ucloud"
-                },
-                {
-                    "name": "qcloud",
-                    "url": "http://baobab.kaiyanapp.com/api/v1/playUrl?vid=1818&editionType=high&source=qcloud"
-                }
-            ],
-            "name": "高清",
-            "type": "high",
-            "url": "http://baobab.kaiyanapp.com/api/v1/playUrl?vid=1818&editionType=high&source=ucloud"
-         }
-     ],
-     "consumption": {
-         "collectionCount": 2570,
-         "shareCount": 1810,
-         "replyCount": 1
-     },
-     "campaign": null,
-     "waterMarks": null,
-     "adTrack": null,
-     "tags": [
-        {
-            "id": 10,
-            "name": "旅行",
-            "actionUrl": "eyepetizer://tag/10/?title=%E6%97%85%E8%A1%8C",
-            "adTrack": null
-         },
-         {
-             "id": 370,
-             "name": "欧洲",
-             "actionUrl": "eyepetizer://tag/370/?title=%E6%AC%A7%E6%B4%B2",
-             "adTrack": null
-         },
-         {
-             "id": 534,
-             "name": "人文",
-             "actionUrl": "eyepetizer://tag/534/?title=%E4%BA%BA%E6%96%87",
-             "adTrack": null
-         },
-         {
-             "id": 196,
-             "name": "清新",
-             "actionUrl": "eyepetizer://tag/196/?title=%E6%B8%85%E6%96%B0",
-             "adTrack": null
-         }
-     ],
-     "type": "NORMAL",
-     "idx": 0,
-     "shareAdTrack": null,
-     "favoriteAdTrack": null,
-     "webAdTrack": null,
-     "date": 1437494400000,
-     "promotion": null,
-     "label": null,
-     "collected": false,
-     "played": false,
-     "coverForFeed": "http://img.kaiyanapp.com/7cf774ad49a5dadb4c695194c1957c9d.jpeg?imageMogr2/quality/100",
-     "coverForDetail": "http://img.kaiyanapp.com/7cf774ad49a5dadb4c695194c1957c9d.jpeg?imageMogr2/quality/100",
-     "coverBlurred": "http://img.kaiyanapp.com/f423b3bfdb93c2694506e56fe52a4af6.jpeg?imageMogr2/quality/100",
-     "coverForSharing": null,
-     "webUrlForWeibo": "http://wandou.im/laxj3",
-     "rawWebUrl": "http://www.eyepetizer.net/detail.html?vid=1818"
+ "type": "video",
+ "data": {
+ "dataType": "VideoBeanForClient",
+ "id": 12192,
+ "title": "假期的温情：「瞬间 Moments」",
+ "description": "英国著名旅行公司 Thomson 借势全球火热的假人挑战，推出了创意广告片「时光 Moments」。总有那么一刻，我们幸福得希望时间可以静止。找回真我，享受真正难忘的瞬间，这便是旅行的意义……From Ad Heaven 2",
+ "provider": {
+ "name": "YouTube",
+ "alias": "youtube",
+ "icon": "http://img.kaiyanapp.com/fa20228bc5b921e837156923a58713f6.png"
  },
- 
+ "category": "广告",
+ "author": null,
+ "cover": {
+ "feed": "http://img.kaiyanapp.com/0f296c9bfc70ed5d9ce964b684a6a51e.jpeg?imageMogr2/quality/60/format/jpg",
+ "detail": "http://img.kaiyanapp.com/0f296c9bfc70ed5d9ce964b684a6a51e.jpeg?imageMogr2/quality/60/format/jpg",
+ "blurred": "http://img.kaiyanapp.com/d6c88b593d9b36c9a008f5c6de5bcf10.jpeg?imageMogr2/quality/60/format/jpg",
+ "sharing": null
+ },
+ "playUrl": "http://baobab.kaiyanapp.com/api/v1/playUrl?vid=12192&editionType=default&source=ucloud",
+ "duration": 60,
+ "webUrl": {
+ "raw": "http://www.eyepetizer.net/detail.html?vid=12192",
+ "forWeibo": "http://wandou.im/3l2goq"
+ },
+ "releaseTime": 1486602000000,
+ "playInfo": [
+ {
+ "height": 480,
+ "width": 854,
+ "urlList": [
+ {
+ "name": "ucloud",
+ "url": "http://baobab.kaiyanapp.com/api/v1/playUrl?vid=12192&editionType=normal&source=ucloud"
+ },
+ {
+ "name": "qcloud",
+ "url": "http://baobab.kaiyanapp.com/api/v1/playUrl?vid=12192&editionType=normal&source=qcloud"
+ }
+ ],
+ "name": "标清",
+ "type": "normal",
+ "url": "http://baobab.kaiyanapp.com/api/v1/playUrl?vid=12192&editionType=normal&source=ucloud"
+ },
+ {
+ "height": 720,
+ "width": 1280,
+ "urlList": [
+ {
+ "name": "ucloud",
+ "url": "http://baobab.kaiyanapp.com/api/v1/playUrl?vid=12192&editionType=high&source=ucloud"
+ },
+ {
+ "name": "qcloud",
+ "url": "http://baobab.kaiyanapp.com/api/v1/playUrl?vid=12192&editionType=high&source=qcloud"
+ }
+ ],
+ "name": "高清",
+ "type": "high",
+ "url": "http://baobab.kaiyanapp.com/api/v1/playUrl?vid=12192&editionType=high&source=ucloud"
+ }
+ ],
+ "consumption": {
+ "collectionCount": 62,
+ "shareCount": 80,
+ "replyCount": 2
+ },
+ "campaign": null,
+ "waterMarks": null,
+ "adTrack": null,
+ "tags": [
+ {
+ "id": 10,
+ "name": "旅行",
+ "actionUrl": "eyepetizer://tag/10/?title=%E6%97%85%E8%A1%8C",
+ "adTrack": null
+ },
+ {
+ "id": 666,
+ "name": "生活",
+ "actionUrl": "eyepetizer://tag/666/?title=%E7%94%9F%E6%B4%BB",
+ "adTrack": null
+ },
+ {
+ "id": 16,
+ "name": "广告",
+ "actionUrl": "eyepetizer://tag/16/?title=%E5%B9%BF%E5%91%8A",
+ "adTrack": null
+ },
+ {
+ "id": 675,
+ "name": "摄影艺术",
+ "actionUrl": "eyepetizer://tag/675/?title=%E6%91%84%E5%BD%B1%E8%89%BA%E6%9C%AF",
+ "adTrack": null
+ },
+ {
+ "id": 110,
+ "name": "亲情",
+ "actionUrl": "eyepetizer://tag/110/?title=%E4%BA%B2%E6%83%85",
+ "adTrack": null
+ },
+ {
+ "id": 2,
+ "name": "创意",
+ "actionUrl": "eyepetizer://tag/2/?title=%E5%88%9B%E6%84%8F",
+ "adTrack": null
+ }
+ ],
+ "type": "NORMAL",
+ "idx": 0,
+ "shareAdTrack": null,
+ "favoriteAdTrack": null,
+ "webAdTrack": null,
+ "date": 1486602000000,
+ "promotion": null,
+ "label": null,
+ "collected": false,
+ "played": false
+ }
  */

@@ -48,7 +48,12 @@ class VideoTableViewCell: UITableViewCell {
     
     lazy var cover: UIImageView = {
         let iv = UIImageView(frame: self.bounds)
-        self.insertSubview(iv, at: 0)
+        self.addSubview(iv)
+        
+        let maskView = UIView(frame: iv.bounds)
+        maskView.backgroundColor = UIColor(hexString: 0x0, alpha: 0.2)
+        self.addSubview(maskView)
+        
         return iv
     }()
     

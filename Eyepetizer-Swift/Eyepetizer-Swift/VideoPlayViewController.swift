@@ -59,7 +59,7 @@ class VideoPlayViewController: UIViewController {
     }
     
     deinit {
-        cs_print("deinit")
+        //cs_print("deinit")
     }
 }
 

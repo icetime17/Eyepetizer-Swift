@@ -21,7 +21,7 @@ class MainViewController: UIViewController {
         self.view.addSubview(tableView)
         
         tableView.register(VideoTableViewCell.classForCoder(), forCellReuseIdentifier: "Cell")
-        tableView.rowHeight = 150
+        tableView.rowHeight = 200
         
         return tableView
     }()
@@ -52,7 +52,7 @@ extension MainViewController {
         }
         
         // dataSource
-        viewModel.getVideoList(type: .lastest)
+        viewModel.getVideoList(type: .dailyFeed)
             .bindTo(tableView.rx.items(dataSource: dataSource))
             .addDisposableTo(CS_DisposeBag)
         
