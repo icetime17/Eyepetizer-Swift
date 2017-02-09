@@ -53,7 +53,7 @@ class VideoPlayViewController: UIViewController {
     
     // Hero
     var heroTransitionID: String? {
-        didSet {
+        willSet {
             self.isHeroEnabled = true
         }
     }

@@ -20,7 +20,7 @@ class MainViewController: UIViewController {
         let tableView = UITableView(frame: self.view.bounds, style: .plain)
         self.view.addSubview(tableView)
         
-        tableView.register(VideoTableViewCell.classForCoder(), forCellReuseIdentifier: "Cell")
+        tableView.register(VideoTableViewCell.classForCoder(), forCellReuseIdentifier: "VideoTableViewCell")
         tableView.rowHeight = 200
         
         return tableView
@@ -42,12 +42,19 @@ extension MainViewController {
         prepareForRx()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        UIApplication.shared.statusBarStyle = .lightContent
+    }
+    
     func prepareForRx() {
         
-        // configure
-        dataSource.configureCell = { (_, tv, indexPath, video) in
-            let cell = tv.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! VideoTableViewCell
-            cell.modelVideo = video
+        // configureCell
+        dataSource.configureCell = { (_, tv, indexPath, modelVideo) in
+            let cell = tv.dequeueReusableCell(withIdentifier: "VideoTableViewCell", for: indexPath) as! VideoTableViewCell
+            cell.backgroundColor = UIColor.cs.random
+            cell.modelVideo = modelVideo
             return cell
         }
         
@@ -60,6 +67,7 @@ extension MainViewController {
         // select
         tableView.rx.modelSelected(ModelVideo.self)
             .subscribe(onNext: { (modelVideo) in
+                
                 guard let indexPath = self.tableView.indexPathForSelectedRow else { return }
                 self.tableView.deselectRow(at: indexPath, animated: false)
                 

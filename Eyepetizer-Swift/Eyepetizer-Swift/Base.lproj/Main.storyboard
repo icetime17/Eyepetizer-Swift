@@ -27,12 +27,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-972" y="797"/>
+            <point key="canvasLocation" x="1089" y="-799"/>
         </scene>
-        <!--View Controller-->
+        <!--Discover-->
         <scene sceneID="f5A-7H-hcT">
             <objects>
-                <viewController id="fA1-hX-dbk" sceneMemberID="viewController">
+                <viewController id="fA1-hX-dbk" customClass="DiscoverViewController" customModule="Eyepetizer_Swift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="pOa-18-WvA"/>
                         <viewControllerLayoutGuide type="bottom" id="Ha6-jW-FCM"/>
@@ -42,16 +42,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="ic_tab_2" selectedImage="ic_tab_2_selected" id="ZIy-U9-niM"/>
+                    <navigationItem key="navigationItem" title="Discover" id="ecU-GK-rHg"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qjf-Kz-P5t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-306" y="797"/>
+            <point key="canvasLocation" x="2116" y="36"/>
         </scene>
-        <!--View Controller-->
+        <!--Me View Controller-->
         <scene sceneID="8Yr-z7-hGj">
             <objects>
-                <viewController id="j4G-m2-YcQ" sceneMemberID="viewController">
+                <viewController id="j4G-m2-YcQ" customClass="MeViewController" customModule="Eyepetizer_Swift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7X6-91-6eH"/>
                         <viewControllerLayoutGuide type="bottom" id="UVa-xa-WI4"/>
@@ -65,12 +65,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gdK-xG-5g5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1026" y="797"/>
+            <point key="canvasLocation" x="1089" y="1649"/>
         </scene>
-        <!--View Controller-->
+        <!--Follow View Controller-->
         <scene sceneID="usi-07-SPg">
             <objects>
-                <viewController id="e58-pV-G47" sceneMemberID="viewController">
+                <viewController id="e58-pV-G47" customClass="FollowViewController" customModule="Eyepetizer_Swift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="XxK-Ml-FWE"/>
                         <viewControllerLayoutGuide type="bottom" id="CRJ-ye-yFL"/>
@@ -84,7 +84,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J9f-Lf-6xT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="351" y="797"/>
+            <point key="canvasLocation" x="1089" y="842"/>
         </scene>
         <!--Video Play View Controller-->
         <scene sceneID="jOl-Cw-b3A">
@@ -323,7 +323,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YWO-PI-z0U" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2000.8" y="35.532233883058474"/>
+            <point key="canvasLocation" x="444" y="-1649"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="ses-Af-kdy">
@@ -336,14 +336,33 @@
                     </tabBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="8ru-EV-MXh"/>
-                        <segue destination="fA1-hX-dbk" kind="relationship" relationship="viewControllers" id="J4d-NK-het"/>
+                        <segue destination="S7Y-I2-zoo" kind="relationship" relationship="viewControllers" id="J4d-NK-het"/>
                         <segue destination="e58-pV-G47" kind="relationship" relationship="viewControllers" id="8Pc-16-dnP"/>
                         <segue destination="j4G-m2-YcQ" kind="relationship" relationship="viewControllers" id="zXV-HN-p4M"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1dG-HZ-m9k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="21.600000000000001" y="36.431784107946029"/>
+            <point key="canvasLocation" x="-26" y="36"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="wBa-bu-rnF">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="S7Y-I2-zoo" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="ic_tab_2" selectedImage="ic_tab_2_selected" id="ZIy-U9-niM"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="n9S-7d-xr3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="fA1-hX-dbk" kind="relationship" relationship="rootViewController" id="ZcH-dZ-9Cs"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ctp-CQ-9Yl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1089" y="36"/>
         </scene>
     </scenes>
     <resources>

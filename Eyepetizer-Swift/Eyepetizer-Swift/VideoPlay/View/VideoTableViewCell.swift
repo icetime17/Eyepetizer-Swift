@@ -1,4 +1,4 @@
-//
+ //
 //  VideoTableViewCell.swift
 //  Eyepetizer-Swift
 //
@@ -10,38 +10,15 @@ import UIKit
 import CSSwiftExtension
 
 
-extension Int {
-
-    var eyepetizerTimeDuration: String {
-        let hour = self / 3600
-        let min = self / 60
-        let sec = self % 60
-        
-        var minStr = ""
-        var secStr = ""
-        minStr = min > 9 ? "\(min)" : "0\(min)"
-        secStr = sec > 9 ? "\(sec)" : "0\(sec)"
-        
-        if hour == 0 {
-            return "\(minStr)'\(secStr)\""
-        } else {
-            var hourStr = ""
-            hourStr = hour > 9 ? "\(hour)" : "0\(hour)"
-            return "\(hourStr)'\(minStr)'\(secStr)\""
-        }
-    }
-    
-}
-
 class VideoTableViewCell: UITableViewCell {
 
     var modelVideo: ModelVideo! {
-        didSet {
+        willSet {
             // can not load cover image while using cell's own imageView, don't know why.
-            cover.kf.setImage(with: URL(string: modelVideo.coverForFeed))
+            cover.kf.setImage(with: URL(string: newValue.coverForFeed))
             
-            lbTitle.text = modelVideo.title
-            lbCategory.text = "#\(modelVideo.category) / \(modelVideo.duration.eyepetizerTimeDuration)"
+            lbTitle.text = newValue.title
+            lbCategory.text = "#\(newValue.category) / \(newValue.duration.eyepetizerTimeDuration)"
         }
     }
     
@@ -74,17 +51,5 @@ class VideoTableViewCell: UITableViewCell {
         self.addSubview(lb)
         return lb
     }()
-    
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
 
 }
