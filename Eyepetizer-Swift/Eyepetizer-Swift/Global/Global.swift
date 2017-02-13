@@ -8,11 +8,6 @@
 
 import Foundation
 
-import RxSwift
-
-
-let CS_DisposeBag = DisposeBag()
-
 
 struct API {
     private static let BaseURL = "http://baobab.kaiyanapp.com/api/v2/"

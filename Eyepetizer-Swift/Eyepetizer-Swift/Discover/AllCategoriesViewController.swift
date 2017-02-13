@@ -37,7 +37,7 @@ class AllCategoriesViewController: UIViewController {
                     self?.dismiss(animated: true, completion: nil)
                 }
             )
-            .addDisposableTo(CS_DisposeBag)
+            .addDisposableTo(self.CS_DisposeBag)
         
         return v
     }()
@@ -60,6 +60,8 @@ class AllCategoriesViewController: UIViewController {
         return cv
     }()
     
+    
+    let CS_DisposeBag = DisposeBag()
     
     let dataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, ModelCategory>>()
     

@@ -11,6 +11,7 @@ import UIKit
 import AVKit
 import AVFoundation
 
+import RxSwift
 import CSSwiftExtension
 
 
@@ -49,6 +50,10 @@ class VideoPlayViewController: UIViewController {
     @IBOutlet weak var textViewDescription: UITextView!
     
     @IBOutlet weak var btnMore: UIButton!
+    
+    
+    
+    let CS_DisposeBag = DisposeBag()
     
     
     // Hero

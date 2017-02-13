@@ -27,8 +27,9 @@ class MainViewController: UIViewController {
     }()
     
     
-    let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, ModelVideo>>()
+    let CS_DisposeBag = DisposeBag()
     
+    let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, ModelVideo>>()
     
     let viewModel = ViewModelVideo()
     

@@ -38,7 +38,7 @@ class CategoryVideoListViewController: UIViewController {
                     self?.dismiss(animated: true, completion: nil)
                 }
             )
-            .addDisposableTo(CS_DisposeBag)
+            .addDisposableTo(self.CS_DisposeBag)
         
         return v
     }()
@@ -61,6 +61,9 @@ class CategoryVideoListViewController: UIViewController {
         
         return cv
     }()
+    
+    
+    let CS_DisposeBag = DisposeBag()
     
     let dataSourceLastest = RxCollectionViewSectionedReloadDataSource<SectionModel<String, ModelVideo>>()
     

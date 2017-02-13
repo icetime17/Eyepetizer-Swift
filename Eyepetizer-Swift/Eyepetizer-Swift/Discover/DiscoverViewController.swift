@@ -34,10 +34,13 @@ class DiscoverViewController: UIViewController {
                     self?.gotoAllCategories()
                 }
             )
-            .addDisposableTo(CS_DisposeBag)
+            .addDisposableTo(self.CS_DisposeBag)
         
         return v
     }()
+    
+    
+    let CS_DisposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
