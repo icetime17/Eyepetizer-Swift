@@ -72,16 +72,10 @@ extension MainViewController {
                 guard let indexPath = self.tableView.indexPathForSelectedRow else { return }
                 self.tableView.deselectRow(at: indexPath, animated: false)
                 
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let videoPlayVC = storyboard.instantiateViewController(withIdentifier: "VideoPlayViewController") as! VideoPlayViewController
-                videoPlayVC.modelVideo = modelVideo
-                
                 let heroTransitionID = "heroTransitionID : videoPlay - \(indexPath.row)"
                 self.tableView.cellForRow(at: indexPath)?.heroID = heroTransitionID
-                videoPlayVC.heroTransitionID = heroTransitionID
                 
-                self.isHeroEnabled = true
-                self.present(videoPlayVC, animated: true, completion: nil)
+                self.gotoVideoPlay(modelVideo: modelVideo, heroTransitionID: heroTransitionID)
                 
             }, onError: nil, onCompleted: nil, onDisposed: nil)
             .addDisposableTo(CS_DisposeBag)
@@ -99,4 +93,17 @@ extension MainViewController {
         
     }
 
+}
+
+extension MainViewController {
+    func gotoVideoPlay(modelVideo: ModelVideo!, heroTransitionID: String!) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let videoPlayVC = storyboard.instantiateViewController(withIdentifier: "VideoPlayViewController") as! VideoPlayViewController
+        videoPlayVC.modelVideo = modelVideo
+        
+        videoPlayVC.heroTransitionID = heroTransitionID
+        
+        self.isHeroEnabled = true
+        self.present(videoPlayVC, animated: true, completion: nil)
+    }
 }
