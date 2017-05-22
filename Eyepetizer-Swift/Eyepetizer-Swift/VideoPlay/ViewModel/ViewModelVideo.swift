@@ -43,42 +43,52 @@ struct ViewModelVideo {
             var videos = [ModelVideo]()
             var section = [SectionModel<String, ModelVideo>]()
             
-            Alamofire.request(API.dailyFeed).responseJSON(completionHandler: { (response) in
-                switch response.result {
-                case .success(let value):
-                    
-                    let json = JSON(value)
-                    let itemList = json["issueList"][0]["itemList"].arrayValue
-                    for item in itemList {
-                        let type                = item["type"]
-                        let data                = item["data"]
-                        let id                  = data["id"].intValue
-                        let title               = data["title"].stringValue
-                        let playUrl             = data["playUrl"].stringValue
-                        let author              = data["author"].stringValue
-                        let coverForFeed        = data["cover"]["feed"].stringValue
-                        let videoDescription    = data["description"].stringValue
-                        let category            = data["category"].stringValue
-                        let duration            = data["duration"].intValue
-                        let video = ModelVideo(id: id,
-                                               title: title,
-                                               playUrl: playUrl,
-                                               author: author,
-                                               coverForFeed: coverForFeed,
-                                               videoDescription: videoDescription,
-                                               category: category,
-                                               duration: duration)
-                        videos.append(video)
+            let parameters: [String: AnyObject] = [
+                "num": 2 as AnyObject,
+            ]
+            Alamofire.request(API.dailyFeed, parameters: parameters)
+                .responseJSON(completionHandler: { (response) in
+                    switch response.result {
+                    case .success(let value):
+                        
+                        let json = JSON(value)
+                        let issueList = json["issueList"].arrayValue
+                        for issue in issueList {
+                            let itemList = issue["itemList"].arrayValue
+                            for item in itemList {
+                                let type                = item["type"].stringValue
+                                if type != "video" {
+                                    continue
+                                }
+                                let data                = item["data"]
+                                let id                  = data["id"].intValue
+                                let title               = data["title"].stringValue
+                                let playUrl             = data["playUrl"].stringValue
+                                let author              = data["author"].stringValue
+                                let coverForFeed        = data["cover"]["feed"].stringValue
+                                let videoDescription    = data["description"].stringValue
+                                let category            = data["category"].stringValue
+                                let duration            = data["duration"].intValue
+                                let video = ModelVideo(id: id,
+                                                       title: title,
+                                                       playUrl: playUrl,
+                                                       author: author,
+                                                       coverForFeed: coverForFeed,
+                                                       videoDescription: videoDescription,
+                                                       category: category,
+                                                       duration: duration)
+                                videos.append(video)
+                            }
+                        }
+                        cs_print("getLastestVideoList : \(videos.count)")
+                        
+                        section = [SectionModel(model: "section", items: videos)]
+                        observer.onNext(section)
+                        observer.onCompleted()
+                        
+                    case .failure(let error):
+                        cs_print(error)
                     }
-                    cs_print("getLastestVideoList : \(videos.count)")
-                    
-                    section = [SectionModel(model: "section", items: videos)]
-                    observer.onNext(section)
-                    observer.onCompleted()
-                    
-                case .failure(let error):
-                    cs_print(error)
-                }
             })
             
             return Disposables.create()
