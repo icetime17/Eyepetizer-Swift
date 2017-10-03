@@ -1,26 +1,42 @@
 //
-//  ModelVideo.swift
+//  RealmModelVideo.swift
 //  Eyepetizer-Swift
 //
-//  Created by Chris Hu on 17/2/7.
-//  Copyright © 2017年 com.icetime17. All rights reserved.
+//  Created by Chris Hu on 2017/10/3.
+//Copyright © 2017年 com.icetime17. All rights reserved.
 //
 
 import Foundation
+import RealmSwift
 
-struct ModelVideo {
-
-    let id              : Int
-    let title           : String
-    let playUrl         : String
-    let author          : String
-    let coverForFeed    : String
-    let videoDescription: String
-    let category        : String
-    let duration        : Int
+class RealmModelVideo: Object {
     
+// Specify properties to ignore (Realm won't persist these)
+    
+//  override static func ignoredProperties() -> [String] {
+//    return []
+//  }
+    
+    dynamic var  id                 = 0
+    dynamic var  title              = ""
+    dynamic var  playUrl            = ""
+    dynamic var  author             = ""
+    dynamic var  coverForFeed       = ""
+    dynamic var  videoDescription   = ""
+    dynamic var  category           = ""
+    dynamic var  duration           = 0
+    
+    func save() {
+        do {
+            var realm = try Realm()
+            try realm.write {
+                realm.add(self)
+            }
+        } catch {
+            
+        }
+    }
 }
-
 
 /*
  

@@ -10,6 +10,7 @@ import Foundation
 
 import Alamofire
 import SwiftyJSON
+import RealmSwift
 
 import RxSwift
 import RxDataSources
@@ -32,10 +33,10 @@ enum VideoListType {
  */
 class ViewModelVideo {
     
-    var videos = [ModelVideo]()
-    var section = [SectionModel<String, ModelVideo>]()
+    var videos  = [RealmModelVideo]()
+    var section = [SectionModel<String, RealmModelVideo>]()
     
-    func getVideoList(type: VideoListType = .dailyFeed) -> Observable<[SectionModel<String, ModelVideo>]> {
+    func getVideoList(type: VideoListType = .dailyFeed) -> Observable<[SectionModel<String, RealmModelVideo>]> {
         switch type {
         case .dailyFeed:
             return getDailyFeed()
@@ -46,11 +47,11 @@ class ViewModelVideo {
         }
     }
     
-    private func getDailyFeed() -> Observable<[SectionModel<String, ModelVideo>]> {
+    private func getDailyFeed() -> Observable<[SectionModel<String, RealmModelVideo>]> {
         
         return Observable.create({ (observer) -> Disposable in
-            var videos = [ModelVideo]()
-            var section = [SectionModel<String, ModelVideo>]()
+            var videos = [RealmModelVideo]()
+            var section = [SectionModel<String, RealmModelVideo>]()
             
             let parameters: [String: AnyObject] = [
                 "num": 2 as AnyObject,
@@ -69,23 +70,19 @@ class ViewModelVideo {
                                 if type != "video" {
                                     continue
                                 }
+                                
                                 let data                = item["data"]
-                                let id                  = data["id"].intValue
-                                let title               = data["title"].stringValue
-                                let playUrl             = data["playUrl"].stringValue
-                                let author              = data["author"].stringValue
-                                let coverForFeed        = data["cover"]["feed"].stringValue
-                                let videoDescription    = data["description"].stringValue
-                                let category            = data["category"].stringValue
-                                let duration            = data["duration"].intValue
-                                let video = ModelVideo(id: id,
-                                                       title: title,
-                                                       playUrl: playUrl,
-                                                       author: author,
-                                                       coverForFeed: coverForFeed,
-                                                       videoDescription: videoDescription,
-                                                       category: category,
-                                                       duration: duration)
+                                
+                                let video               = RealmModelVideo()
+                                video.id                = data["id"].intValue
+                                video.title             = data["title"].stringValue
+                                video.playUrl           = data["playUrl"].stringValue
+                                video.author            = data["author"].stringValue
+                                video.coverForFeed      = data["cover"]["feed"].stringValue
+                                video.videoDescription  = data["description"].stringValue
+                                video.category          = data["category"].stringValue
+                                video.duration          = data["duration"].intValue
+                                
                                 videos.append(video)
                             }
                         }
@@ -109,40 +106,41 @@ class ViewModelVideo {
         })
     }
     
-    private func getDownloaded() -> Observable<[SectionModel<String, ModelVideo>]> {
+    private func getDownloaded() -> Observable<[SectionModel<String, RealmModelVideo>]> {
         return Observable.create({ (observer) -> Disposable in
-            var videos = [ModelVideo]()
-            var section = [SectionModel<String, ModelVideo>]()
+            var videos = [RealmModelVideo]()
             
             let docDir = FileManager.default.cs.documentsDirectory
             let videosDir = "\(docDir)/downloads/videos"
-            var files = [String]()
+            
             do {
-                files = try FileManager.default.contentsOfDirectory(atPath: videosDir)
+                let realm = try Realm()
+                let realmModelVideos = try realm.objects(RealmModelVideo.self)
+                for realmModelVideo in realmModelVideos {
+                    let videoPath = "\(videosDir)/\(realmModelVideo.playUrl)"
+                    if FileManager.default.fileExists(atPath: videoPath) {
+                        let video = RealmModelVideo()
+                        video.id                = realmModelVideo.id
+                        video.title             = realmModelVideo.title
+                        video.playUrl           = videoPath
+                        video.author            = realmModelVideo.author
+                        video.coverForFeed      = realmModelVideo.coverForFeed
+                        video.videoDescription  = realmModelVideo.videoDescription
+                        video.category          = realmModelVideo.category
+                        video.duration          = realmModelVideo.duration
+                        
+                        videos.append(video)
+                    }
+                }
             } catch {
-            
-            }
-            print(files)
-            
-            for file in files {
-                let videoPath = "\(videosDir)/\(file)"
-                let video = ModelVideo(id: -1,
-                                       title: file,
-                                       playUrl: videoPath,
-                                       author: "",
-                                       coverForFeed: "",
-                                       videoDescription: "",
-                                       category: "",
-                                       duration: -1)
-                videos.append(video)
+                
             }
             
             cs_print("downloaded videos : \(videos.count)")
             
             self.videos.append(contentsOf: videos)
             
-            section = [SectionModel(model: "section", items: self.videos)]
-            self.section = section
+            self.section = [SectionModel(model: "section", items: self.videos)]
             
             observer.onNext(self.section)
             observer.onCompleted()

@@ -12,7 +12,7 @@ import CSSwiftExtension
 
 class VideoCollectionViewCell: UICollectionViewCell {
 
-    var modelVideo: ModelVideo! {
+    var realmModelVideo: RealmModelVideo! {
         willSet {
             // can not load cover image while using cell's own imageView, don't know why.
             cover.kf.setImage(with: URL(string: newValue.coverForFeed))

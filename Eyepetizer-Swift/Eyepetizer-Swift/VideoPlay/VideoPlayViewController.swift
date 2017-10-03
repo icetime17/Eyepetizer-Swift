@@ -17,7 +17,7 @@ import CSSwiftExtension
 
 class VideoPlayViewController: UIViewController {
     
-    var modelVideo: ModelVideo!
+    var realmModelVideo: RealmModelVideo!
     
     var avPlayer: AVPlayer!
     var avPlayerItem: AVPlayerItem!
@@ -98,7 +98,7 @@ extension VideoPlayViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        let avAsset = AVAsset(url: URL(string: modelVideo.playUrl)!)
+        let avAsset = AVAsset(url: URL(string: RealmModelVideo.playUrl)!)
         guard let naturalSize = avAsset.tracks.first?.naturalSize else { return }
         print(naturalSize)
         let screenSize = UIScreen.main.cs.screenSize
@@ -151,13 +151,13 @@ extension VideoPlayViewController {
 // MARK: - UI
 extension VideoPlayViewController {
     func prepareUI() {
-        videoCover.kf.setImage(with: URL(string: modelVideo.coverForFeed))
+        videoCover.kf.setImage(with: URL(string: realmModelVideo.coverForFeed))
         
-        lbTitle.text = modelVideo.title
-        lbCategory.text = "#\(modelVideo.category) / \(modelVideo.duration.eyepetizerTimeDuration)"
-        textViewDescription.text = modelVideo.videoDescription
+        lbTitle.text = realmModelVideo.title
+        lbCategory.text = "#\(realmModelVideo.category) / \(realmModelVideo.duration.eyepetizerTimeDuration)"
+        textViewDescription.text = realmModelVideo.videoDescription
         
-        if modelVideo.playUrl.contains("http") {
+        if realmModelVideo.playUrl.contains("http") {
             btnDownload.isHidden = false
         } else {
             btnDownload.isHidden = true
@@ -174,7 +174,7 @@ extension VideoPlayViewController {
     }
     
     func seek() {
-        let cmTime = CMTimeMake(Int64(sliderPlayProgress.value * 100) * Int64(modelVideo.duration), 100)
+        let cmTime = CMTimeMake(Int64(sliderPlayProgress.value * 100) * Int64(realmModelVideo.duration), 100)
 //        let progress = Int64(sliderPlayProgress.value * 100)
 //        avPlayer.seek(to: CMTime(value: CMTimeValue(progress), timescale: CMTimeScale(CMTimeValue(100))))
         avPlayer.seek(to: cmTime)
@@ -342,16 +342,17 @@ extension VideoPlayViewController {
     
     func actionVideoDownload() {
         let docDir = FileManager.default.cs.documentsDirectory
-        let filePath = "\(docDir)/downloads/videos/\(modelVideo.title).mp4"
+        let videosDir = "\(docDir)/downloads/videos"
+        let filePath = "\(videosDir)/\(realmModelVideo.title).mp4"
         if FileManager.default.fileExists(atPath: filePath) {
-            print("already exists : \(modelVideo.title)")
+            print("already exists : \(realmModelVideo.title)")
             return
         }
         
         let urlSession = URLSession(configuration: URLSessionConfiguration.default,
                                          delegate: self,
                                     delegateQueue: OperationQueue.main)
-        let downloadTask = urlSession.downloadTask(with: URL(string: modelVideo.playUrl)!)
+        let downloadTask = urlSession.downloadTask(with: URL(string: realmModelVideo.playUrl)!)
         downloadTask.resume()
     }
     
@@ -366,10 +367,10 @@ extension VideoPlayViewController {
     fileprivate func p_startPlayingVideo() {
         // video from network
         var videoURL: URL!
-        if modelVideo.playUrl.contains("/downloads/") {
-            videoURL = URL(fileURLWithPath: modelVideo.playUrl)
-        } else if modelVideo.playUrl.contains("http") {
-            videoURL = URL(string: modelVideo.playUrl)
+        if realmModelVideo.playUrl.contains("/downloads/") {
+            videoURL = URL(fileURLWithPath: realmModelVideo.playUrl)
+        } else if realmModelVideo.playUrl.contains("http") {
+            videoURL = URL(string: realmModelVideo.playUrl)
         } else {
             cs_print("unknown video source.")
             return
@@ -449,7 +450,7 @@ extension VideoPlayViewController: URLSessionDownloadDelegate {
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
         print("done")
         let docDir = FileManager.default.cs.documentsDirectory
-        let videosDir = "\(docDir)/downloads/videos/"
+        let videosDir = "\(docDir)/downloads/videos"
         if FileManager.default.fileExists(atPath: videosDir) == false {
             do {
                 try FileManager.default.createDirectory(atPath: videosDir,
@@ -459,11 +460,14 @@ extension VideoPlayViewController: URLSessionDownloadDelegate {
                 cs_print("fail to create directory \(videosDir)")
             }
         }
-        let toURL = NSURL(fileURLWithPath: "\(docDir)/downloads/videos/\(modelVideo.title).mp4")
+        let videoPath = "\(videosDir)/\(realmModelVideo.title).mp4"
+        let toURL = NSURL(fileURLWithPath: videoPath)
         do {
             try FileManager.default.moveItem(at: location, to: toURL as URL)
+            realmModelVideo.playUrl = "\(realmModelVideo.title).mp4"
+            realmModelVideo.save()
         } catch {
-            cs_print("fail to move video \(modelVideo.title)")
+            cs_print("fail to move video \(realmModelVideo.title)")
         }
     }
     

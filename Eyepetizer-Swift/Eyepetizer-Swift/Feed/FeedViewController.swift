@@ -30,7 +30,7 @@ class FeedViewController: UIViewController {
     
     let CS_DisposeBag = DisposeBag()
     
-    let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, ModelVideo>>()
+    let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, RealmModelVideo>>()
     
     var viewModel = ViewModelVideo()
     
@@ -53,10 +53,10 @@ extension FeedViewController {
     func prepareForRx() {
         
         // configureCell
-        dataSource.configureCell = { (_, tv, indexPath, modelVideo) in
+        dataSource.configureCell = { (_, tv, indexPath, realmModelVideo) in
             let cell = tv.dequeueReusableCell(withIdentifier: "VideoTableViewCell", for: indexPath) as! VideoTableViewCell
             cell.backgroundColor = UIColor.cs.random
-            cell.modelVideo = modelVideo
+            cell.realmModelVideo = realmModelVideo
             return cell
         }
         
@@ -67,8 +67,8 @@ extension FeedViewController {
         
         
         // select
-        tableView.rx.modelSelected(ModelVideo.self)
-            .subscribe(onNext: { (modelVideo) in
+        tableView.rx.modelSelected(RealmModelVideo.self)
+            .subscribe(onNext: { (realmModelVideo) in
                 
                 guard let indexPath = self.tableView.indexPathForSelectedRow else { return }
                 self.tableView.deselectRow(at: indexPath, animated: false)
@@ -76,7 +76,7 @@ extension FeedViewController {
                 let heroTransitionID = "heroTransitionID : videoPlay - \(indexPath.row)"
                 self.tableView.cellForRow(at: indexPath)?.heroID = heroTransitionID
                 
-                self.gotoVideoPlay(modelVideo: modelVideo, heroTransitionID: heroTransitionID)
+                self.gotoVideoPlay(realmModelVideo: realmModelVideo, heroTransitionID: heroTransitionID)
                 
             }, onError: nil, onCompleted: nil, onDisposed: nil)
             .addDisposableTo(CS_DisposeBag)
@@ -105,10 +105,10 @@ extension FeedViewController {
 }
 
 extension FeedViewController {
-    func gotoVideoPlay(modelVideo: ModelVideo!, heroTransitionID: String!) {
+    func gotoVideoPlay(realmModelVideo: RealmModelVideo!, heroTransitionID: String!) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let videoPlayVC = storyboard.instantiateViewController(withIdentifier: "VideoPlayViewController") as! VideoPlayViewController
-        videoPlayVC.modelVideo = modelVideo
+        videoPlayVC.realmModelVideo = realmModelVideo
         
         videoPlayVC.heroTransitionID = heroTransitionID
         

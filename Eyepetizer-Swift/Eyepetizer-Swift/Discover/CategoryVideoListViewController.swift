@@ -65,7 +65,7 @@ class CategoryVideoListViewController: UIViewController {
     
     let CS_DisposeBag = DisposeBag()
     
-    let dataSourceLastest = RxCollectionViewSectionedReloadDataSource<SectionModel<String, ModelVideo>>()
+    let dataSourceLastest = RxCollectionViewSectionedReloadDataSource<SectionModel<String, RealmModelVideo>>()
     
     let viewModelLastest = ViewModelVideo()
     
@@ -98,10 +98,10 @@ class CategoryVideoListViewController: UIViewController {
     private func prepareRx() {
         
         // configureCell
-        dataSourceLastest.configureCell = { (_, cv, indexPath, modelVideo) in
+        dataSourceLastest.configureCell = { (_, cv, indexPath, realmModelVideo) in
             let cell = cv.dequeueReusableCell(withReuseIdentifier: "VideoCollectionViewCell", for: indexPath) as! VideoCollectionViewCell
             cell.backgroundColor = UIColor.cs.random
-            cell.modelVideo = modelVideo
+            cell.realmModelVideo = realmModelVideo
             return cell
         }
     
@@ -111,15 +111,15 @@ class CategoryVideoListViewController: UIViewController {
             .addDisposableTo(CS_DisposeBag)
         
         // select
-        collectionViewLastest.rx.modelSelected(ModelVideo.self)
-            .subscribe(onNext: { (modelVideo) in
+        collectionViewLastest.rx.modelSelected(RealmModelVideo.self)
+            .subscribe(onNext: { (realmModelVideo) in
                 
                 guard let indexPath = self.collectionViewLastest.indexPathsForSelectedItems?.first else { return }
                 self.collectionViewLastest.deselectItem(at: indexPath, animated: false)
                 
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let videoPlayVC = storyboard.instantiateViewController(withIdentifier: "VideoPlayViewController") as! VideoPlayViewController
-                videoPlayVC.modelVideo = modelVideo
+                videoPlayVC.realmModelVideo = realmModelVideo
                 
                 let heroTransitionID = "heroTransitionID : videoPlay - \(indexPath.row)"
                 self.collectionViewLastest.cellForItem(at: indexPath)?.heroID = heroTransitionID
