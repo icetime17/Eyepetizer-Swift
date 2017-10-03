@@ -3,6 +3,11 @@ PODS:
   - CSSwiftExtension (0.1.2)
   - Hero (0.1.8)
   - Kingfisher (3.3.4)
+  - Realm (2.10.2):
+    - Realm/Headers (= 2.10.2)
+  - Realm/Headers (2.10.2)
+  - RealmSwift (2.10.2):
+    - Realm (= 2.10.2)
   - RxCocoa (3.2.0):
     - RxSwift (~> 3.1)
   - RxDataSources (1.0.2):
@@ -16,6 +21,7 @@ DEPENDENCIES:
   - CSSwiftExtension
   - Hero
   - Kingfisher
+  - RealmSwift
   - RxCocoa
   - RxDataSources
   - RxSwift
@@ -26,11 +32,13 @@ SPEC CHECKSUMS:
   CSSwiftExtension: ce51f26219314df00002b7cba28ab0b3d53234cb
   Hero: 801137d01690792d231184aea6d7fae6abcc9cdf
   Kingfisher: 35f289f015d26e81ea6c85048718c6205f3933c6
+  Realm: 0ef72b837fb67e9f4b098bac771ddd72c7fdbb69
+  RealmSwift: 07a9ae0505091eda6b2ee7c190c3786d6e90a7b0
   RxCocoa: ccdf43101a70407097a29082f648ba1676075b30
   RxDataSources: 1de77880bf5b7fcee42102adcd5a5d65e5b81541
   RxSwift: 46574f70d416b7923c237195939cc488a7fbf3a0
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 28be4065f6fcd5e88a4bab88beff2459a388cb0e
+PODFILE CHECKSUM: def3d1e41ef00a4c2c142bf227eacbb392a81e18
 
-COCOAPODS: 1.2.0.beta.1
+COCOAPODS: 1.3.1
