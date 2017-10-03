@@ -1,5 +1,5 @@
 //
-//  MainViewController.swift
+//  FeedViewController.swift
 //  Eyepetizer-Swift
 //
 //  Created by Chris Hu on 17/2/7.
@@ -14,14 +14,15 @@ import Kingfisher
 import Hero
 
 
-class MainViewController: UIViewController {
+class FeedViewController: UIViewController {
 
     lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: self.view.bounds, style: .plain)
+        let frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height - 49)
+        let tableView = UITableView(frame: frame, style: .plain)
         self.view.addSubview(tableView)
         
         tableView.register(VideoTableViewCell.classForCoder(), forCellReuseIdentifier: "VideoTableViewCell")
-        tableView.rowHeight = 200
+        tableView.rowHeight = kScreenWidth() / 4 * 3
         
         return tableView
     }()
@@ -31,11 +32,11 @@ class MainViewController: UIViewController {
     
     let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, ModelVideo>>()
     
-    let viewModel = ViewModelVideo()
+    var viewModel = ViewModelVideo()
     
 }
 
-extension MainViewController {
+extension FeedViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,6 +89,14 @@ extension MainViewController {
                 } else {
                     UIApplication.shared.statusBarStyle = .default
                 }
+                
+                if contentOffset < -100 {
+                    print("pull to refresh")
+                    // TODO:
+                    self.viewModel.videos.append(self.viewModel.videos.first!)
+                    
+                    self.viewModel.section = [SectionModel(model: "section", items: self.viewModel.videos)]
+                }
             })
             .addDisposableTo(CS_DisposeBag)
         
@@ -95,7 +104,7 @@ extension MainViewController {
 
 }
 
-extension MainViewController {
+extension FeedViewController {
     func gotoVideoPlay(modelVideo: ModelVideo!, heroTransitionID: String!) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let videoPlayVC = storyboard.instantiateViewController(withIdentifier: "VideoPlayViewController") as! VideoPlayViewController

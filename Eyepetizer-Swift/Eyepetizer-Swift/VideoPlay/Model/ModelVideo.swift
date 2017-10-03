@@ -41,15 +41,18 @@ struct ModelVideo {
  "feed": "http://img.kaiyanapp.com/0f296c9bfc70ed5d9ce964b684a6a51e.jpeg?imageMogr2/quality/60/format/jpg",
  "detail": "http://img.kaiyanapp.com/0f296c9bfc70ed5d9ce964b684a6a51e.jpeg?imageMogr2/quality/60/format/jpg",
  "blurred": "http://img.kaiyanapp.com/d6c88b593d9b36c9a008f5c6de5bcf10.jpeg?imageMogr2/quality/60/format/jpg",
- "sharing": null
+ "sharing": null,
+ "homepage": "http://img.kaiyanapp.com/2c2979aba2159a9b275d87388e090cb5.jpeg?imageView2/1/w/720/h/560/format/jpg/q/75|watermark/1/image/aHR0cDovL2ltZy5rYWl5YW5hcHAuY29tL2JsYWNrXzMwLnBuZw==/dissolve/100/gravity/Center/dx/0/dy/0|imageslim",
  },
  "playUrl": "http://baobab.kaiyanapp.com/api/v1/playUrl?vid=12192&editionType=default&source=ucloud",
+ "thumbPlayUrl": "http://baobab.kaiyanapp.com/api/v1/playUrl/1503652052049_70f1344f.mp4?vid=12292&source=qcloud",
  "duration": 60,
  "webUrl": {
  "raw": "http://www.eyepetizer.net/detail.html?vid=12192",
  "forWeibo": "http://wandou.im/3l2goq"
  },
  "releaseTime": 1486602000000,
+ "library": "DAILY",
  "playInfo": [
  {
  "height": 480,
@@ -58,10 +61,12 @@ struct ModelVideo {
  {
  "name": "ucloud",
  "url": "http://baobab.kaiyanapp.com/api/v1/playUrl?vid=12192&editionType=normal&source=ucloud"
+ "size": 20650198
  },
  {
  "name": "qcloud",
  "url": "http://baobab.kaiyanapp.com/api/v1/playUrl?vid=12192&editionType=normal&source=qcloud"
+ "size": 20650198
  }
  ],
  "name": "标清",
@@ -133,14 +138,22 @@ struct ModelVideo {
  }
  ],
  "type": "NORMAL",
+ "titlePgc": null,
+ "descriptionPgc": null,
+ "remark": "",
  "idx": 0,
  "shareAdTrack": null,
  "favoriteAdTrack": null,
  "webAdTrack": null,
- "date": 1486602000000,
+ "date": 1504314000000,
  "promotion": null,
  "label": null,
+ "labelList": [],
+ "descriptionEditor": "兰萨罗特岛（Lanzarote）是一座地处西班牙的火山岛，也是大西洋加那利群岛中的第四大岛。在拍摄中，有过寒冷、孤独、食不果腹，但能有幸记录下如此绝美的景色，一切辛苦都是值得的。From Gustavo Medina",
  "collected": false,
- "played": false
+ "played": false,
+ "subtitles": [],
+ "lastViewTime": null,
+ "playlists": null
  }
  */

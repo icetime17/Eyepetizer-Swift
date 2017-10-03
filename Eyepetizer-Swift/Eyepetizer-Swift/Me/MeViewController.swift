@@ -8,12 +8,27 @@
 
 import UIKit
 
+import RxSwift
+import RxDataSources
+
 class MeViewController: UIViewController {
 
+    let CS_DisposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        let btnLeft = UIButton(frame: CGRect(x: 0, y: 10, width: 100, height: 40))
+        btnLeft.setTitle("已下载", for: .normal)
+        btnLeft.setTitleColor(UIColor.darkGray, for: .normal)
+        self.view.addSubview(btnLeft)
+        btnLeft.rx.tap
+            .subscribe(
+                onNext: { [weak self] in
+                    self?.gotoDownloadedVideos()
+                }
+            )
+            .addDisposableTo(self.CS_DisposeBag)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -27,15 +42,9 @@ class MeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func gotoDownloadedVideos() {
+        let downloadedVieosVC = DownloadedVideosViewController()
+        downloadedVieosVC.modelCategory = ModelCategory(id: -1, name: "已下载", categoryDesc: "已下载", bgPicture:  "", headerImage: "")
+        self.present(downloadedVieosVC, animated: true, completion: nil)
     }
-    */
-
 }

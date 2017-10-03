@@ -8,12 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		2CD8F6B581A0EC755FA240A4 /* Pods_Eyepetizer_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21FB7D62A973CA7FAE76FEC3 /* Pods_Eyepetizer_Swift.framework */; };
+		A426600D1F5A2DAA002DC120 /* Global+Methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = A426600C1F5A2DAA002DC120 /* Global+Methods.swift */; };
+		A426600F1F5A4C8C002DC120 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = A426600E1F5A4C8C002DC120 /* Global.swift */; };
 		A43F2B421E45BCE60096BCB5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43F2B411E45BCE60096BCB5 /* AppDelegate.swift */; };
 		A43F2B471E45BCE60096BCB5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A43F2B451E45BCE60096BCB5 /* Main.storyboard */; };
 		A43F2B491E45BCE60096BCB5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A43F2B481E45BCE60096BCB5 /* Assets.xcassets */; };
 		A43F2B4C1E45BCE60096BCB5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A43F2B4A1E45BCE60096BCB5 /* LaunchScreen.storyboard */; };
 		A43F2B571E45BCE60096BCB5 /* Eyepetizer_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43F2B561E45BCE60096BCB5 /* Eyepetizer_SwiftTests.swift */; };
-		A4E9F3D51E4C1A1700818627 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E9F3C91E4C1A1700818627 /* MainViewController.swift */; };
+		A4E9F3D51E4C1A1700818627 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E9F3C91E4C1A1700818627 /* FeedViewController.swift */; };
 		A4E9F3D61E4C1A1700818627 /* FollowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E9F3CB1E4C1A1700818627 /* FollowViewController.swift */; };
 		A4E9F3D81E4C1A1700818627 /* VideoPlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E9F3CE1E4C1A1700818627 /* VideoPlayViewController.swift */; };
 		A4E9F3DB1E4C1A1700818627 /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E9F3D21E4C1A1700818627 /* MeViewController.swift */; };
@@ -25,10 +27,11 @@
 		A4E9F3EA1E4C400A00818627 /* ViewModelVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E9F3E71E4C400A00818627 /* ViewModelVideo.swift */; };
 		A4E9F3EE1E4C409700818627 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E9F3ED1E4C409700818627 /* CategoryCollectionViewCell.swift */; };
 		A4E9F3F01E4C40B700818627 /* ViewModelCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E9F3EF1E4C40B700818627 /* ViewModelCategory.swift */; };
-		A4E9F3F51E4C46C000818627 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E9F3F41E4C46C000818627 /* Global.swift */; };
+		A4E9F3F51E4C46C000818627 /* Global+API.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E9F3F41E4C46C000818627 /* Global+API.swift */; };
 		A4E9F3F71E4C4B7700818627 /* CategoryVideoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E9F3F61E4C4B7700818627 /* CategoryVideoListViewController.swift */; };
 		A4E9F3F91E4C65DB00818627 /* VideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E9F3F81E4C65DB00818627 /* VideoCollectionViewCell.swift */; };
 		A4E9F3FB1E4C660700818627 /* Global+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E9F3FA1E4C660700818627 /* Global+Extension.swift */; };
+		A4FF37701F5FB95C0030A5DA /* DownloadedVideosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FF376F1F5FB95C0030A5DA /* DownloadedVideosViewController.swift */; };
 		EF5A7A8766F3530E779300DC /* Pods_Eyepetizer_SwiftTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66147D3D7CBBCEAA467E1FF3 /* Pods_Eyepetizer_SwiftTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +50,8 @@
 		27348F7BFBE11D20D8E0AAD5 /* Pods-Eyepetizer-Swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Eyepetizer-Swift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Eyepetizer-Swift/Pods-Eyepetizer-Swift.debug.xcconfig"; sourceTree = "<group>"; };
 		480DB8183795335A99E63B52 /* Pods-Eyepetizer-Swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Eyepetizer-Swift.release.xcconfig"; path = "Pods/Target Support Files/Pods-Eyepetizer-Swift/Pods-Eyepetizer-Swift.release.xcconfig"; sourceTree = "<group>"; };
 		66147D3D7CBBCEAA467E1FF3 /* Pods_Eyepetizer_SwiftTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Eyepetizer_SwiftTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A426600C1F5A2DAA002DC120 /* Global+Methods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Global+Methods.swift"; sourceTree = "<group>"; };
+		A426600E1F5A4C8C002DC120 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		A43F2B3E1E45BCE60096BCB5 /* Eyepetizer-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Eyepetizer-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A43F2B411E45BCE60096BCB5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A43F2B461E45BCE60096BCB5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -56,7 +61,7 @@
 		A43F2B521E45BCE60096BCB5 /* Eyepetizer-SwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Eyepetizer-SwiftTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A43F2B561E45BCE60096BCB5 /* Eyepetizer_SwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Eyepetizer_SwiftTests.swift; sourceTree = "<group>"; };
 		A43F2B581E45BCE60096BCB5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A4E9F3C91E4C1A1700818627 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		A4E9F3C91E4C1A1700818627 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		A4E9F3CB1E4C1A1700818627 /* FollowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowViewController.swift; sourceTree = "<group>"; };
 		A4E9F3CE1E4C1A1700818627 /* VideoPlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayViewController.swift; sourceTree = "<group>"; };
 		A4E9F3D21E4C1A1700818627 /* MeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
@@ -68,10 +73,11 @@
 		A4E9F3E71E4C400A00818627 /* ViewModelVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModelVideo.swift; sourceTree = "<group>"; };
 		A4E9F3ED1E4C409700818627 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		A4E9F3EF1E4C40B700818627 /* ViewModelCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModelCategory.swift; sourceTree = "<group>"; };
-		A4E9F3F41E4C46C000818627 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
+		A4E9F3F41E4C46C000818627 /* Global+API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Global+API.swift"; sourceTree = "<group>"; };
 		A4E9F3F61E4C4B7700818627 /* CategoryVideoListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryVideoListViewController.swift; sourceTree = "<group>"; };
 		A4E9F3F81E4C65DB00818627 /* VideoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCollectionViewCell.swift; sourceTree = "<group>"; };
 		A4E9F3FA1E4C660700818627 /* Global+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Global+Extension.swift"; sourceTree = "<group>"; };
+		A4FF376F1F5FB95C0030A5DA /* DownloadedVideosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadedVideosViewController.swift; sourceTree = "<group>"; };
 		B11E79766D21BF9FB6F910D2 /* Pods-Eyepetizer-SwiftTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Eyepetizer-SwiftTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Eyepetizer-SwiftTests/Pods-Eyepetizer-SwiftTests.release.xcconfig"; sourceTree = "<group>"; };
 		C1ABEF1638A84E8931D82150 /* Pods-Eyepetizer-SwiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Eyepetizer-SwiftTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Eyepetizer-SwiftTests/Pods-Eyepetizer-SwiftTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -139,15 +145,15 @@
 		A43F2B401E45BCE60096BCB5 /* Eyepetizer-Swift */ = {
 			isa = PBXGroup;
 			children = (
-				A43F2B411E45BCE60096BCB5 /* AppDelegate.swift */,
-				A43F2B451E45BCE60096BCB5 /* Main.storyboard */,
 				A4E9F3F31E4C46B900818627 /* Global */,
 				A4E9F3C81E4C1A1700818627 /* Feed */,
 				A4E9F3D31E4C1A1700818627 /* Discover */,
 				A4E9F3CA1E4C1A1700818627 /* Follow */,
 				A4E9F3D11E4C1A1700818627 /* Me */,
 				A4E9F3CC1E4C1A1700818627 /* VideoPlay */,
+				A43F2B411E45BCE60096BCB5 /* AppDelegate.swift */,
 				A43F2B481E45BCE60096BCB5 /* Assets.xcassets */,
+				A43F2B451E45BCE60096BCB5 /* Main.storyboard */,
 				A43F2B4A1E45BCE60096BCB5 /* LaunchScreen.storyboard */,
 				A43F2B4D1E45BCE60096BCB5 /* Info.plist */,
 			);
@@ -166,7 +172,7 @@
 		A4E9F3C81E4C1A1700818627 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
-				A4E9F3C91E4C1A1700818627 /* MainViewController.swift */,
+				A4E9F3C91E4C1A1700818627 /* FeedViewController.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -194,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				A4E9F3D21E4C1A1700818627 /* MeViewController.swift */,
+				A4FF376F1F5FB95C0030A5DA /* DownloadedVideosViewController.swift */,
 			);
 			path = Me;
 			sourceTree = "<group>";
@@ -263,7 +270,9 @@
 		A4E9F3F31E4C46B900818627 /* Global */ = {
 			isa = PBXGroup;
 			children = (
-				A4E9F3F41E4C46C000818627 /* Global.swift */,
+				A426600E1F5A4C8C002DC120 /* Global.swift */,
+				A4E9F3F41E4C46C000818627 /* Global+API.swift */,
+				A426600C1F5A2DAA002DC120 /* Global+Methods.swift */,
 				A4E9F3FA1E4C660700818627 /* Global+Extension.swift */,
 			);
 			path = Global;
@@ -325,12 +334,12 @@
 				TargetAttributes = {
 					A43F2B3D1E45BCE60096BCB5 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = GGVWN85K85;
+						DevelopmentTeam = NZPBGBZZ28;
 						ProvisioningStyle = Automatic;
 					};
 					A43F2B511E45BCE60096BCB5 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = GGVWN85K85;
+						DevelopmentTeam = NZPBGBZZ28;
 						ProvisioningStyle = Automatic;
 						TestTargetID = A43F2B3D1E45BCE60096BCB5;
 					};
@@ -476,14 +485,17 @@
 				A4E9F3F01E4C40B700818627 /* ViewModelCategory.swift in Sources */,
 				A4E9F3DB1E4C1A1700818627 /* MeViewController.swift in Sources */,
 				A4E9F3D81E4C1A1700818627 /* VideoPlayViewController.swift in Sources */,
-				A4E9F3D51E4C1A1700818627 /* MainViewController.swift in Sources */,
+				A4E9F3D51E4C1A1700818627 /* FeedViewController.swift in Sources */,
+				A426600F1F5A4C8C002DC120 /* Global.swift in Sources */,
 				A4E9F3FB1E4C660700818627 /* Global+Extension.swift in Sources */,
+				A426600D1F5A2DAA002DC120 /* Global+Methods.swift in Sources */,
 				A4E9F3E91E4C400A00818627 /* VideoTableViewCell.swift in Sources */,
 				A4E9F3E81E4C400A00818627 /* ModelVideo.swift in Sources */,
 				A4E9F3F91E4C65DB00818627 /* VideoCollectionViewCell.swift in Sources */,
 				A4E9F3E11E4C3F1C00818627 /* ModelCategory.swift in Sources */,
 				A4E9F3EE1E4C409700818627 /* CategoryCollectionViewCell.swift in Sources */,
-				A4E9F3F51E4C46C000818627 /* Global.swift in Sources */,
+				A4E9F3F51E4C46C000818627 /* Global+API.swift in Sources */,
+				A4FF37701F5FB95C0030A5DA /* DownloadedVideosViewController.swift in Sources */,
 				A4E9F3DE1E4C39F400818627 /* AllCategoriesViewController.swift in Sources */,
 				A43F2B421E45BCE60096BCB5 /* AppDelegate.swift in Sources */,
 				A4E9F3D61E4C1A1700818627 /* FollowViewController.swift in Sources */,
@@ -628,11 +640,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = GGVWN85K85;
+				DEVELOPMENT_TEAM = NZPBGBZZ28;
 				INFOPLIST_FILE = "Eyepetizer-Swift/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.icetime17.Eyepetizer-Swift";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.icetime.-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -644,11 +656,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = GGVWN85K85;
+				DEVELOPMENT_TEAM = NZPBGBZZ28;
 				INFOPLIST_FILE = "Eyepetizer-Swift/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.icetime17.Eyepetizer-Swift";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.icetime.-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -660,7 +672,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = GGVWN85K85;
+				DEVELOPMENT_TEAM = NZPBGBZZ28;
 				INFOPLIST_FILE = "Eyepetizer-SwiftTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.icetime17.Eyepetizer-SwiftTests";
@@ -676,7 +688,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = GGVWN85K85;
+				DEVELOPMENT_TEAM = NZPBGBZZ28;
 				INFOPLIST_FILE = "Eyepetizer-SwiftTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.icetime17.Eyepetizer-SwiftTests";

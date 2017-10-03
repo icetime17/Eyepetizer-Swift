@@ -24,14 +24,23 @@ enum VideoListType {
     case totalRank
     case moreByDate
     case shareRank
+    case downloaded
 }
 
-struct ViewModelVideo {
+/** 
+ 编译器不允许在struct的closure中使用self。所以这种情况可以使用class
+ */
+class ViewModelVideo {
+    
+    var videos = [ModelVideo]()
+    var section = [SectionModel<String, ModelVideo>]()
     
     func getVideoList(type: VideoListType = .dailyFeed) -> Observable<[SectionModel<String, ModelVideo>]> {
         switch type {
         case .dailyFeed:
             return getDailyFeed()
+        case .downloaded:
+            return getDownloaded()
         default:
             return getDailyFeed()
         }
@@ -82,8 +91,12 @@ struct ViewModelVideo {
                         }
                         cs_print("getLastestVideoList : \(videos.count)")
                         
-                        section = [SectionModel(model: "section", items: videos)]
-                        observer.onNext(section)
+                        self.videos.append(contentsOf: videos)
+                        
+                        section = [SectionModel(model: "section", items: self.videos)]
+                        self.section = section
+                        
+                        observer.onNext(self.section)
                         observer.onCompleted()
                         
                     case .failure(let error):
@@ -96,4 +109,45 @@ struct ViewModelVideo {
         })
     }
     
+    private func getDownloaded() -> Observable<[SectionModel<String, ModelVideo>]> {
+        return Observable.create({ (observer) -> Disposable in
+            var videos = [ModelVideo]()
+            var section = [SectionModel<String, ModelVideo>]()
+            
+            let docDir = FileManager.default.cs.documentsDirectory
+            let videosDir = "\(docDir)/downloads/videos"
+            var files = [String]()
+            do {
+                files = try FileManager.default.contentsOfDirectory(atPath: videosDir)
+            } catch {
+            
+            }
+            print(files)
+            
+            for file in files {
+                let videoPath = "\(videosDir)/\(file)"
+                let video = ModelVideo(id: -1,
+                                       title: file,
+                                       playUrl: videoPath,
+                                       author: "",
+                                       coverForFeed: "",
+                                       videoDescription: "",
+                                       category: "",
+                                       duration: -1)
+                videos.append(video)
+            }
+            
+            cs_print("downloaded videos : \(videos.count)")
+            
+            self.videos.append(contentsOf: videos)
+            
+            section = [SectionModel(model: "section", items: self.videos)]
+            self.section = section
+            
+            observer.onNext(self.section)
+            observer.onCompleted()
+            
+            return Disposables.create()
+        })
+    }
 }
