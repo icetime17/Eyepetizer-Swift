@@ -11,6 +11,7 @@ import Foundation
 
 public extension String {
 
+    // length
     public var cs_length: Int {
         return characters.count
     }
@@ -45,7 +46,7 @@ public extension String {
         let scanner = Scanner(string: self)
         var s: NSString? = ""
         if scanner.scanString(self, into: &s) {
-            let stringValue = s as? String
+            let stringValue = s as String?
             return stringValue
         }
         return nil
@@ -64,6 +65,46 @@ public extension String {
         return dateFormatter.date(from: self)
     }
     
+}
+
+public extension String {
+    
+    // reverse
+    public var cs_reversed: String {
+        return String(characters.reversed())
+    }
+    
+    // index of subString
+    public func cs_indexOfSubString(_ tString: String) -> Int {
+        if tString.isEmpty {
+            return -1
+        }
+        
+        let oChars = [Character](characters)
+        let tChars = [Character](tString.characters)
+        
+        if oChars.count < tChars.count {
+            return -1
+        }
+        
+        for i in 0...(oChars.count - tChars.count) {
+            if oChars[i] != tChars[0] {
+                continue
+            }
+            
+            for j in 0..<tChars.count {
+                if oChars[i+j] != tChars[j] {
+                    break
+                }
+                
+                if j == tChars.count - 1 {
+                    return i
+                }
+            }
+        }
+        
+        return -1
+    }
 }
 
 // MARK: - Regular expression
@@ -89,6 +130,16 @@ public extension String {
 // MARK: - Method
 public extension String {
     
+    // dynamic height
+    public func dts_heightOf(font: UIFont, maxSize: CGSize) -> CGFloat {
+        let rect = (self as NSString).boundingRect(with: maxSize,
+                                                   options: .usesLineFragmentOrigin,
+                                                   attributes: [NSFontAttributeName: font],
+                                                   context: nil)
+        return rect.height
+    }
+    
+    // custom font, line, kern
     public func cs_attributesStringWithFont(font: UIFont, lineSpacing: CGFloat, kernSpacing: CGFloat, textAlignment: NSTextAlignment) -> NSAttributedString {
         let paraStyle = NSMutableParagraphStyle()
         paraStyle.lineBreakMode = .byWordWrapping
@@ -107,6 +158,31 @@ public extension String {
             NSKernAttributeName: kernSpacing
             ] as [String : Any]
         return NSAttributedString(string: self, attributes: dict)
+    }
+    
+}
+
+// MARK: - Version Compare
+public extension String {
+    
+    public func cs_isEqualTo(_ v: String) -> Bool {
+        return self.compare(v, options: .numeric, range: nil, locale: nil) == .orderedSame
+    }
+    
+    public func cs_isHigherThan(_ v: String) -> Bool {
+        return self.compare(v, options: .numeric, range: nil, locale: nil) == .orderedDescending
+    }
+    
+    public func cs_isEqualToOrHigherThan(_ v: String) -> Bool {
+        return self.compare(v, options: .numeric, range: nil, locale: nil) != .orderedAscending
+    }
+    
+    public func cs_isLowerThan(_ v: String) -> Bool {
+        return self.compare(v, options: .numeric, range: nil, locale: nil) == .orderedAscending
+    }
+    
+    public func cs_isEqualToOrLowerThan(_ v: String) -> Bool {
+        return self.compare(v, options: .numeric, range: nil, locale: nil) != .orderedDescending
     }
     
 }

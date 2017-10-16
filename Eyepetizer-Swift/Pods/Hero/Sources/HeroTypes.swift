@@ -22,15 +22,17 @@
 
 import UIKit
 
-public protocol HeroPreprocessor {
+public protocol HeroPreprocessor: class {
+  weak var context: HeroContext! { get set }
   func process(fromViews: [UIView], toViews: [UIView])
 }
 
-public protocol HeroAnimator {
+public protocol HeroAnimator: class {
+  weak var context: HeroContext! { get set }
   func canAnimate(view: UIView, appearing: Bool) -> Bool
   func animate(fromViews: [UIView], toViews: [UIView]) -> TimeInterval
   func clean()
-  
+
   func seekTo(timePassed: TimeInterval)
   func resume(timePassed: TimeInterval, reverse: Bool) -> TimeInterval
   func apply(state: HeroTargetState, to view: UIView)
@@ -44,7 +46,7 @@ public protocol HeroProgressUpdateObserver {
   @objc optional func heroWillStartAnimatingFrom(viewController: UIViewController)
   @objc optional func heroDidEndAnimatingFrom(viewController: UIViewController)
   @objc optional func heroDidCancelAnimatingFrom(viewController: UIViewController)
-  
+
   @objc optional func heroWillStartTransition()
   @objc optional func heroDidEndTransition()
   @objc optional func heroDidCancelTransition()

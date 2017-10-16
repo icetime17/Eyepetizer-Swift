@@ -23,6 +23,8 @@
 import UIKit
 
 open class HeroPlugin: NSObject, HeroPreprocessor, HeroAnimator {
+  weak public var context: HeroContext!
+
   /**
     Determines whether or not to receive `seekTo` callback on every frame.
    
@@ -34,9 +36,9 @@ open class HeroPlugin: NSObject, HeroPreprocessor, HeroAnimator {
     When **requirePerFrameCallback** is **true**, the plugin will receive `seekTo` callback on every animation frame. Hence it is possible for the plugin to do per-frame animations without implementing `animate` & `resume`
    */
   open var requirePerFrameCallback = false
-  
+
   public override required init() {}
-  
+
   /**
    Called before any animation.
    Override this method when you want to preprocess modifiers for views
@@ -57,7 +59,7 @@ open class HeroPlugin: NSObject, HeroPreprocessor, HeroAnimator {
 
   */
   open func process(fromViews: [UIView], toViews: [UIView]) {}
-  
+
   /**
    - Returns: return true if the plugin can handle animating the view.
    - Parameters:
@@ -68,7 +70,7 @@ open class HeroPlugin: NSObject, HeroPreprocessor, HeroAnimator {
    The view will also be hidden automatically during the animation.
    */
   open func canAnimate(view: UIView, appearing: Bool) -> Bool { return false }
-  
+
   /**
    Perform the animation.
 
@@ -79,9 +81,9 @@ open class HeroPlugin: NSObject, HeroPreprocessor, HeroAnimator {
        - toViews: A flattened list of all views from destination ViewController (filtered by `canAnimate`)
    - Returns: The duration needed to complete the animation
    */
-  
+
   open func animate(fromViews: [UIView], toViews: [UIView]) -> TimeInterval { return 0 }
-  
+
   /**
    Called when all animations are completed.
 
@@ -124,9 +126,6 @@ open class HeroPlugin: NSObject, HeroPreprocessor, HeroAnimator {
 
 // methods for enable/disable the current plugin
 extension HeroPlugin {
-  public var context: HeroContext {
-    return Hero.shared.context
-  }
   public static var isEnabled: Bool {
     get {
       return Hero.isEnabled(plugin: self)

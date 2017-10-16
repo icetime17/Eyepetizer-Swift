@@ -13,15 +13,15 @@ import ImageIO
 extension UIImage {
     
     /**
-     UIImage init from an URL string
+     UIImage init from an URL string. Synchronsize and NOT recommended.
      
      - parameter urlString: URL string
      
      - returns: UIImage
      */
     public convenience init(urlString: String) {
-        let imageData = NSData(contentsOf: NSURL(string: urlString) as! URL)
-        self.init(data: imageData as! Data)!
+        let imageData = try! Data(contentsOf: URL(string: urlString)!)
+        self.init(data: imageData)!
     }
     
     /**
@@ -37,12 +37,22 @@ extension UIImage {
         defer {
             UIGraphicsEndImageContext()
         }
+        
         pureColor.setFill()
         UIRectFill(CGRect(origin: CGPoint.zero, size: targetSize))
         let image = UIGraphicsGetImageFromCurrentImageContext()!
         self.init(cgImage: image.cgImage!)
     }
     
+}
+
+public extension CSSwift where Base: UIImage {
+    
+    // center
+    public var center: CGPoint {
+        return CGPoint(x: base.size.width / 2, y: base.size.height / 2)
+    }
+
 }
 
 // MARK: - save
@@ -52,11 +62,12 @@ public extension CSSwift where Base: UIImage {
      Save UIImage to file
      
      - parameter filePath:          file path
-     - parameter compressionFactor: compression factor, only useful for JPEG format image.
+     - parameter compressionFactor: compression factor, only useful for JPEG format image. 
+                                    Default to be 1.0.
      
      - returns: true or false
      */
-    public func saveImageToFile(filePath: String, compressionFactor: CGFloat) -> Bool {
+    public func saveImageToFile(filePath: String, compressionFactor: CGFloat = 1.0) -> Bool {
         let imageData: NSData!
         if filePath.hasSuffix(".jpeg") {
             imageData = UIImageJPEGRepresentation(base, compressionFactor) as NSData!
@@ -120,7 +131,7 @@ public extension CSSwift where Base: UIImage {
             rectRatioed = CGRect(x: 0, y: (base.size.height - heightImage) / 2, width: widthImage, height: heightImage)
         }
         
-        return self.imageCropped(bounds: rectRatioed)
+        return imageCropped(bounds: rectRatioed)
     }
     
     /**
@@ -133,6 +144,10 @@ public extension CSSwift where Base: UIImage {
         let height = base.size.height
         
         UIGraphicsBeginImageContext(base.size)
+        defer {
+            UIGraphicsEndImageContext()
+        }
+        
         let context = UIGraphicsGetCurrentContext()
         context?.interpolationQuality = .high
         
@@ -142,7 +157,6 @@ public extension CSSwift where Base: UIImage {
         
         let imageRef = context!.makeImage()
         let resultImage = UIImage(cgImage: imageRef!)
-        UIGraphicsEndImageContext()
         
         return resultImage
     }
@@ -155,7 +169,7 @@ public extension CSSwift where Base: UIImage {
      - returns: UIImage rotated
      */
     public func imageRotatedByDegrees(degrees: CGFloat) -> UIImage {
-        let radians = CGFloat(M_PI) * degrees / 180.0
+        let radians = CGFloat(Double.pi) * degrees / 180.0
         
         // calculate the size of the rotated view's containing box for our drawing space
         let rotatedViewBox = UIView(frame: CGRect(x: 0, y: 0, width: base.size.width, height: base.size.height))
@@ -165,6 +179,10 @@ public extension CSSwift where Base: UIImage {
         
         // Create bitmap context.
         UIGraphicsBeginImageContext(rotatedSize)
+        defer {
+            UIGraphicsEndImageContext()
+        }
+        
         let context = UIGraphicsGetCurrentContext()
         
         // Move the origin to the middle of the image so we will rotate and.
@@ -178,7 +196,6 @@ public extension CSSwift where Base: UIImage {
         context?.draw(base.cgImage!, in: CGRect(x: -base.size.width / 2.0, y: -base.size.height / 2.0, width: base.size.width, height: base.size.height))
         
         let imageRotated = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
         
         return imageRotated!
     }
@@ -188,10 +205,11 @@ public extension CSSwift where Base: UIImage {
      
      - parameter targetSize:        targetSize
      - parameter withOriginalRatio: whether the result UIImage should keep the original ratio
+                                    Default to be true
      
      - returns: UIImage scaled
      */
-    public func imageScaledToSize(targetSize: CGSize, withOriginalRatio: Bool) -> UIImage {
+    public func imageScaledToSize(targetSize: CGSize, withOriginalRatio: Bool = true) -> UIImage {
         var sizeFinal = targetSize
         
         if withOriginalRatio {
@@ -206,9 +224,13 @@ public extension CSSwift where Base: UIImage {
         }
         
         UIGraphicsBeginImageContext(sizeFinal)
+        defer {
+            UIGraphicsEndImageContext()
+        }
+        
         base.draw(in: CGRect(x: 0, y: 0, width: sizeFinal.width, height: sizeFinal.height))
         let imageScaled: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
+        
         return imageScaled
     }
     
@@ -217,23 +239,28 @@ public extension CSSwift where Base: UIImage {
      Much better than setting layer.cornerRadius and layer.masksToBounds.
      
      - parameter cornerRadius: corner radius
+     - parameter backgroundColor: backgroundColor, default clear color.
      
      - returns: UIImage
      */
-    public func imageWithCornerRadius(cornerRadius: CGFloat) -> UIImage {
-        let frame = CGRect(x: 0, y: 0, width: base.size.width, height: base.size.height)
+    public func imageWithCornerRadius(cornerRadius: CGFloat, backgroundColor: UIColor = UIColor.clear) -> UIImage {
+        let rect = CGRect(x: 0, y: 0, width: base.size.width, height: base.size.height)
         
         UIGraphicsBeginImageContext(base.size)
+        defer {
+            UIGraphicsEndImageContext()
+        }
         
         // Add a clip before drawing anything, in the shape of an rounded rect
-        UIBezierPath(roundedRect: frame, cornerRadius: cornerRadius).addClip()
+        UIBezierPath(roundedRect: rect, cornerRadius: cornerRadius).addClip()
+        
+        backgroundColor.setFill()
+        UIRectFill(rect)
         
         // Draw the image
-        base.draw(in: frame)
+        base.draw(in: rect)
         
         let imageWithCornerRadius = UIGraphicsGetImageFromCurrentImageContext()
-        
-        UIGraphicsEndImageContext()
         
         return imageWithCornerRadius!
     }
@@ -244,9 +271,13 @@ public extension CSSwift where Base: UIImage {
         }
         
         UIGraphicsBeginImageContextWithOptions(base.size, false, base.scale)
+        defer {
+            UIGraphicsEndImageContext()
+        }
+        
         base.draw(in: CGRect(origin: CGPoint.zero, size: base.size))
         let normalizedImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
+        
         return normalizedImage!
     }
     
@@ -261,6 +292,9 @@ public extension CSSwift where Base: UIImage {
         // using previously defined context (with grayscale colorspace)
         guard let context = CGContext(data: nil, width: Int(base.size.width), height: Int(base.size.height), bitsPerComponent: 8, bytesPerRow: 0, space: colorSpace, bitmapInfo: bitmapInfo.rawValue) else { return base }
         
+        context.setFillColor(UIColor.clear.cgColor)
+        context.fill(rect)
+        
         context.draw(base.cgImage!, in: rect)
         // Create bitmap image info from pixel data in current context
         guard let imageRef = context.makeImage() else { return base }
@@ -273,6 +307,93 @@ public extension CSSwift where Base: UIImage {
         return newImage;
     }
     
+}
+
+// MARK: - Watermark
+public extension CSSwift where Base: UIImage {
+    // Add image watermark via rect
+    public func imageWithWatermark(img: UIImage, rect: CGRect) -> UIImage {
+        p_setUpImageContext()
+        
+        img.draw(in: rect)
+        
+        let r = p_imageFromContext()
+        
+        p_tearDownImageContext()
+        
+        return r
+    }
+    
+    // Add image watermark via center and size
+    public func imageWithWatermark(img: UIImage,
+                                   center: CGPoint,
+                                   size: CGSize) -> UIImage {
+        let rect = CGRect(x: center.x - size.width / 2,
+                          y: center.y - size.height / 2,
+                          width: size.width,
+                          height: size.height)
+        
+        return imageWithWatermark(img: img, rect: rect)
+    }
+    
+    // Text
+    public func imageWithWatermark(text: String,
+                                   point: CGPoint,
+                                   font: UIFont,
+                                   color: UIColor = .white) -> UIImage {
+        let style = NSMutableParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
+        style.alignment = .center
+        let attributes = [
+            NSFontAttributeName: font,
+            NSParagraphStyleAttributeName: style,
+            NSForegroundColorAttributeName: color,
+        ]
+        
+        return imageWithWatermark(text: text, point: point, attributes: attributes)
+    }
+    
+    // Text with custom style
+    /**
+     let style = NSMutableParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
+     style.alignment = .center
+     let attributes = [
+        NSFontAttributeName: font,
+        NSParagraphStyleAttributeName: style,
+        NSForegroundColorAttributeName: color,
+     ]
+     imageWithWatermark(text: text, point: point, attributes: attributes)
+     */
+    public func imageWithWatermark(text: String,
+                                   point: CGPoint,
+                                   attributes: [String : Any]?) -> UIImage {
+        p_setUpImageContext()
+        
+        (text as NSString).draw(at: point, withAttributes: attributes)
+        
+        let r = p_imageFromContext()
+        
+        p_tearDownImageContext()
+        
+        return r
+    }
+    
+    private func p_setUpImageContext() {
+        let rectCanvas = CGRect(origin: CGPoint.zero, size: base.size)
+        UIGraphicsBeginImageContextWithOptions(rectCanvas.size, false, 0)
+        base.draw(in: rectCanvas)
+    }
+    
+    private func p_tearDownImageContext() {
+        UIGraphicsEndImageContext()
+    }
+    
+    private func p_imageFromContext() -> UIImage {
+        guard let retImage = UIGraphicsGetImageFromCurrentImageContext() else {
+            return base
+        }
+        
+        return retImage
+    }
 }
 
 // MARK: - 微信分享缩略图
@@ -314,12 +435,12 @@ public extension CSSwift where Base: UIImage {
             imageSize = CGSize(width: base.size.width * scale, height: base.size.height * scale)
         }
         
-        let image = self.thumbnailWithSize(targetSize: imageSize, isNeedCut: isNeedCut)
+        let image = p_thumbnailWithSize(targetSize: imageSize, isNeedCut: isNeedCut)
         let imageData = UIImageJPEGRepresentation(image, 0.4)
         return UIImage(data: imageData!)!
     }
     
-    private func thumbnailWithSize(targetSize: CGSize, isNeedCut: Bool) -> UIImage {
+    private func p_thumbnailWithSize(targetSize: CGSize, isNeedCut: Bool) -> UIImage {
         var imageSize = base.size
         let scaleWidth = targetSize.width / imageSize.width
         let scaleHeight = targetSize.height / imageSize.height
@@ -327,6 +448,9 @@ public extension CSSwift where Base: UIImage {
         imageSize = CGSize(width: imageSize.width * scale, height: imageSize.height * scale)
         
         UIGraphicsBeginImageContext(imageSize)
+        defer {
+            UIGraphicsEndImageContext()
+        }
         
         let context = UIGraphicsGetCurrentContext()
         context?.interpolationQuality = .medium
@@ -338,8 +462,6 @@ public extension CSSwift where Base: UIImage {
         UIGraphicsPopContext()
         
         let tmpImage = UIGraphicsGetImageFromCurrentImageContext()
-        
-        UIGraphicsEndImageContext()
         
         if targetSize.width == 0 || targetSize.height == 0 || !isNeedCut {
             return tmpImage!

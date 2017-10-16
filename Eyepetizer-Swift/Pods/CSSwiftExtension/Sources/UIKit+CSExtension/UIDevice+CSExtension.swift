@@ -9,6 +9,48 @@
 import UIKit
 
 
+public extension CSSwift where Base: UIDevice {
+
+    public static var isSimulator: Bool {
+        #if (arch(i386) || arch(x86_64)) && os(iOS)
+            return true
+        #endif
+        
+        return false
+    }
+    
+}
+
+// MARK: - SystemVersion Related
+
+public extension CSSwift where Base: UIDevice {
+    
+    public var systemVersion: String {
+        return UIDevice.current.systemVersion
+    }
+    
+    public func isSystemVersionEqualTo(_ v: String) -> Bool {
+        return base.systemVersion.cs_isEqualTo(v)
+    }
+    
+    public func isSystemVersionHigherThan(_ v: String) -> Bool {
+        return base.systemVersion.cs_isHigherThan(v)
+    }
+    
+    public func isSystemVersionEqualToOrHigherThan(_ v: String) -> Bool {
+        return base.systemVersion.cs_isEqualToOrHigherThan(v)
+    }
+    
+    public func isSystemVersionLowerThan(_ v: String) -> Bool {
+        return base.systemVersion.cs_isLowerThan(v)
+    }
+    
+    public func isSystemVersionEqualToOrLowerThan(_ v: String) -> Bool {
+        return base.systemVersion.cs_isEqualToOrLowerThan(v)
+    }
+    
+}
+
 // MARK: - Language Related
 
 public extension CSSwift where Base: UIDevice {
