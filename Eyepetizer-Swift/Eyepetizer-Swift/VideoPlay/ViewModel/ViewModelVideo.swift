@@ -13,6 +13,7 @@ import SwiftyJSON
 import RealmSwift
 
 import RxSwift
+import RxCocoa
 import RxDataSources
 
 import CSSwiftExtension
@@ -35,6 +36,7 @@ class ViewModelVideo {
     
     var videos  = [RealmModelVideo]()
     var section = [SectionModel<String, RealmModelVideo>]()
+    var curPageIndex = 1
     
     func getVideoList(type: VideoListType = .dailyFeed) -> Observable<[SectionModel<String, RealmModelVideo>]> {
         switch type {
@@ -50,16 +52,14 @@ class ViewModelVideo {
     private func getDailyFeed() -> Observable<[SectionModel<String, RealmModelVideo>]> {
         
         return Observable.create({ (observer) -> Disposable in
-            var videos = [RealmModelVideo]()
-            var section = [SectionModel<String, RealmModelVideo>]()
-            
             let parameters: [String: AnyObject] = [
-                "num": 2 as AnyObject,
+                "num": 2 * self.curPageIndex as AnyObject,
             ]
             Alamofire.request(API.dailyFeed, parameters: parameters)
                 .responseJSON(completionHandler: { (response) in
                     switch response.result {
                     case .success(let value):
+                        var videos = [RealmModelVideo]()
                         
                         let json = JSON(value)
                         let issueList = json["issueList"].arrayValue
@@ -86,15 +86,14 @@ class ViewModelVideo {
                                 videos.append(video)
                             }
                         }
-                        cs_print("getLastestVideoList : \(videos.count)")
+                        cs_print("daily feed page index : \(self.curPageIndex), videos : \(videos.count)")
                         
-                        self.videos.append(contentsOf: videos)
+                        self.curPageIndex = self.curPageIndex + 1
                         
-                        section = [SectionModel(model: "section", items: self.videos)]
-                        self.section = section
-                        
+                        self.videos = videos
+                        self.section = [SectionModel(model: "section", items: self.videos)]
                         observer.onNext(self.section)
-                        observer.onCompleted()
+                        // TODO: cannot send completed message if there are more videos to load
                         
                     case .failure(let error):
                         cs_print(error)
