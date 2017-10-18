@@ -99,8 +99,8 @@ class AllCategoriesViewController: UIViewController {
         
         // dataSource
         viewModel.getCategories()
-            .bindTo(collectionView.rx.items(dataSource: dataSource))
-            .addDisposableTo(CS_DisposeBag)
+            .bind(to: collectionView.rx.items(dataSource: dataSource))
+            .disposed(by: CS_DisposeBag)
         
         // select
         collectionView.rx.modelSelected(ModelCategory.self)
@@ -114,7 +114,7 @@ class AllCategoriesViewController: UIViewController {
                 self.present(categoryVideoListVC, animated: true, completion: nil)
                 
             }, onError: nil, onCompleted: nil, onDisposed: nil)
-            .addDisposableTo(CS_DisposeBag)
+            .disposed(by: CS_DisposeBag)
         
     }
     

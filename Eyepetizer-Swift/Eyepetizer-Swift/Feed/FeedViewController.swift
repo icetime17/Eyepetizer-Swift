@@ -92,8 +92,8 @@ extension FeedViewController {
         // dataSource
         /*
         viewModel.getVideoList(type: .dailyFeed)
-            .bindTo(tableView.rx.items(dataSource: dataSource))
-            .addDisposableTo(CS_DisposeBag)
+            .bind(to: tableView.rx.items(dataSource: dataSource))
+            .disposed(by: CS_DisposeBag)
         */
         
         let videoListInput = ViewModelVideoList.VideoListInput(type: .dailyFeed)
@@ -101,7 +101,7 @@ extension FeedViewController {
         videoListOutput.sections
             .asDriver()
             .drive(tableView.rx.items(dataSource: dataSource))
-            .addDisposableTo(CS_DisposeBag)
+            .disposed(by: CS_DisposeBag)
         
         // 因requestCommand的next事件会触发网络请求
         videoListOutput.requestCommand.onNext(true)
@@ -120,7 +120,7 @@ extension FeedViewController {
                 self.gotoVideoPlay(realmModelVideo: realmModelVideo, heroTransitionID: heroTransitionID)
                 
             }, onError: nil, onCompleted: nil, onDisposed: nil)
-            .addDisposableTo(CS_DisposeBag)
+            .disposed(by: CS_DisposeBag)
 
         /*
         tableView.rx.contentOffset
@@ -196,7 +196,7 @@ extension FeedViewController {
                     }
                 }
             })
-            .addDisposableTo(CS_DisposeBag)
+            .disposed(by: CS_DisposeBag)
         */
         
         let loadingView = DGElasticPullToRefreshLoadingViewCircle()

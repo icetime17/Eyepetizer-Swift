@@ -71,7 +71,7 @@ class VideoPlayViewController: UIViewController {
     }
     
     deinit {
-        //cs_print("deinit")
+        cs_print("video play vc deinit")
     }
 }
 
@@ -192,7 +192,7 @@ extension VideoPlayViewController {
                     self?.dismiss(animated: true, completion: nil)
                 }
             )
-            .addDisposableTo(CS_DisposeBag)
+            .disposed(by: CS_DisposeBag)
         
         btnPlayVideoNetwork.rx.tap
             .subscribe(
@@ -200,7 +200,7 @@ extension VideoPlayViewController {
                     self?.actionPlayVideoNetwork()
                 }
             )
-            .addDisposableTo(CS_DisposeBag)
+            .disposed(by: CS_DisposeBag)
         
         btnNextVideoNetwork.rx.tap
             .subscribe(
@@ -208,7 +208,7 @@ extension VideoPlayViewController {
                     self?.actionNextVideoNetwork()
                 }
             )
-            .addDisposableTo(CS_DisposeBag)
+            .disposed(by: CS_DisposeBag)
         
         btnLastVideoNetwork.rx.tap
             .subscribe(
@@ -216,7 +216,7 @@ extension VideoPlayViewController {
                     self?.actionLastVideoNetwork()
                 }
             )
-            .addDisposableTo(CS_DisposeBag)
+            .disposed(by: CS_DisposeBag)
         
         sliderPlayProgress.rx.value
             .asObservable()
@@ -225,7 +225,7 @@ extension VideoPlayViewController {
                     print(value)
                 }
             )
-            .addDisposableTo(CS_DisposeBag)
+            .disposed(by: CS_DisposeBag)
         
         // tool bar
         btnDownload.rx.tap
@@ -234,7 +234,7 @@ extension VideoPlayViewController {
                     self?.actionVideoDownload()
                 }
             )
-            .addDisposableTo(CS_DisposeBag)
+            .disposed(by: CS_DisposeBag)
         
         btnFavorite.rx.tap
             .subscribe(
@@ -242,7 +242,7 @@ extension VideoPlayViewController {
                     self?.actionVideoFavorite()
                 }
             )
-            .addDisposableTo(CS_DisposeBag)
+            .disposed(by: CS_DisposeBag)
     }
 }
 

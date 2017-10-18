@@ -107,8 +107,8 @@ class CategoryVideoListViewController: UIViewController {
     
         // dataSource
         viewModelLastest.getVideoList()
-            .bindTo(collectionViewLastest.rx.items(dataSource: dataSourceLastest))
-            .addDisposableTo(CS_DisposeBag)
+            .bind(to: collectionViewLastest.rx.items(dataSource: dataSourceLastest))
+            .disposed(by: CS_DisposeBag)
         
         // select
         collectionViewLastest.rx.modelSelected(RealmModelVideo.self)
@@ -129,7 +129,7 @@ class CategoryVideoListViewController: UIViewController {
                 self.present(videoPlayVC, animated: true, completion: nil)
                 
             }, onError: nil, onCompleted: nil, onDisposed: nil)
-            .addDisposableTo(CS_DisposeBag)
+            .disposed(by: CS_DisposeBag)
         
     }
     
