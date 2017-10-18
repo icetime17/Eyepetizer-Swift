@@ -37,6 +37,8 @@ class VideoPlayViewController: UIViewController {
     @IBOutlet weak var btnNextVideoNetwork: UIButton!
     @IBOutlet weak var btnLastVideoNetwork: UIButton!
     
+    @IBOutlet weak var btnFullScreen: UIButton!
+    
     // cache progress
     @IBOutlet weak var progressViewVideoNetworkLoading: UIProgressView!
     
@@ -75,6 +77,7 @@ class VideoPlayViewController: UIViewController {
     }
 }
 
+// MARK: - Life cycle
 extension VideoPlayViewController {
     
     override func viewDidLoad() {
@@ -214,6 +217,14 @@ extension VideoPlayViewController {
             .subscribe(
                 onNext: { [weak self] in
                     self?.actionLastVideoNetwork()
+                }
+            )
+            .disposed(by: CS_DisposeBag)
+        
+        btnFullScreen.rx.tap
+            .subscribe(
+                onNext: { [weak self] in
+                    self?.actionFullScreen()
                 }
             )
             .disposed(by: CS_DisposeBag)
@@ -358,6 +369,10 @@ extension VideoPlayViewController {
     
     func actionVideoFavorite() {
         print("favorite")
+    }
+    
+    func actionFullScreen() {
+        print("full screen")
     }
 }
 

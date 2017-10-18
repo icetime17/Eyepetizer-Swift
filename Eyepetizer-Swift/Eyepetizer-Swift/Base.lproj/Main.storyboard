@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="obK-ey-6RY">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="obK-ey-6RY">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -161,6 +162,14 @@
                                                     <color key="titleColor" red="0.99215686270000003" green="0.40784313729999999" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lum-BI-YiI">
+                                                <rect key="frame" x="325" y="10" width="40" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="DlD-wd-w0z"/>
+                                                    <constraint firstAttribute="height" constant="30" id="P2c-u0-H14"/>
+                                                </constraints>
+                                                <state key="normal" title="Button" image="btn.video.fullscreen"/>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -168,6 +177,7 @@
                                             <constraint firstItem="cT8-dA-UnG" firstAttribute="centerY" secondItem="0UP-Ng-KE3" secondAttribute="centerY" id="2AR-t6-c28"/>
                                             <constraint firstItem="fvo-Ww-9ct" firstAttribute="leading" secondItem="rad-Eb-FUf" secondAttribute="trailing" constant="20" id="3xF-Kx-hIS"/>
                                             <constraint firstItem="xDJ-5B-fSH" firstAttribute="trailing" secondItem="rad-Eb-FUf" secondAttribute="leading" constant="-20" id="6SY-ft-Uyl"/>
+                                            <constraint firstItem="Lum-BI-YiI" firstAttribute="top" secondItem="dvD-Nv-1vD" secondAttribute="top" constant="10" id="7bZ-mZ-xS9"/>
                                             <constraint firstAttribute="bottom" secondItem="0UP-Ng-KE3" secondAttribute="bottom" constant="20" id="8Y6-Yz-ZBz"/>
                                             <constraint firstItem="3JD-KL-RBC" firstAttribute="centerY" secondItem="0UP-Ng-KE3" secondAttribute="centerY" id="DsM-D1-r3x"/>
                                             <constraint firstItem="3JD-KL-RBC" firstAttribute="width" secondItem="0UP-Ng-KE3" secondAttribute="width" id="IgN-Ir-IUF"/>
@@ -179,6 +189,7 @@
                                             <constraint firstItem="0UP-Ng-KE3" firstAttribute="leading" secondItem="dvD-Nv-1vD" secondAttribute="leading" constant="20" id="dry-pq-heA"/>
                                             <constraint firstItem="xDJ-5B-fSH" firstAttribute="centerY" secondItem="rad-Eb-FUf" secondAttribute="centerY" id="g2H-Gp-f5v"/>
                                             <constraint firstItem="3JD-KL-RBC" firstAttribute="centerX" secondItem="0UP-Ng-KE3" secondAttribute="centerX" id="nrk-vB-tB9"/>
+                                            <constraint firstAttribute="trailing" secondItem="Lum-BI-YiI" secondAttribute="trailing" constant="10" id="vqd-QJ-3sL"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -328,6 +339,7 @@
                         <outlet property="btnBack" destination="z4n-Wx-aWl" id="0Wl-GT-fdz"/>
                         <outlet property="btnDownload" destination="fbN-JB-Olq" id="TLf-pg-8u0"/>
                         <outlet property="btnFavorite" destination="DbI-vq-M4G" id="8fl-S1-PLq"/>
+                        <outlet property="btnFullScreen" destination="Lum-BI-YiI" id="DWe-zv-QqC"/>
                         <outlet property="btnLastVideoNetwork" destination="xDJ-5B-fSH" id="LUY-2P-ikn"/>
                         <outlet property="btnMore" destination="Vyk-ao-pIz" id="nmG-mt-8d9"/>
                         <outlet property="btnNextVideoNetwork" destination="fvo-Ww-9ct" id="NaJ-8a-rsc"/>
@@ -377,7 +389,6 @@
                     <tabBarItem key="tabBarItem" title="" image="ic_tab_2" selectedImage="ic_tab_2_selected" id="ZIy-U9-niM"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="n9S-7d-xr3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -393,6 +404,7 @@
     <resources>
         <image name="btn.video.download" width="50" height="50"/>
         <image name="btn.video.favorite" width="50" height="50"/>
+        <image name="btn.video.fullscreen" width="118" height="118"/>
         <image name="btnPlay" width="79" height="79"/>
         <image name="ic_tab_1" width="49" height="49"/>
         <image name="ic_tab_1_selected" width="49" height="49"/>
