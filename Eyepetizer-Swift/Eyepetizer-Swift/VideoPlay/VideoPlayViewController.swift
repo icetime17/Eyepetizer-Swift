@@ -80,8 +80,8 @@ extension VideoPlayViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        prepareUI()
-        prepareRx()
+        setupUI()
+        setupRx()
         
         setupSliderGesture()
     }
@@ -150,7 +150,7 @@ extension VideoPlayViewController {
 
 // MARK: - UI
 extension VideoPlayViewController {
-    func prepareUI() {
+    func setupUI() {
         videoCover.kf.setImage(with: URL(string: realmModelVideo.coverForFeed))
         
         lbTitle.text = realmModelVideo.title
@@ -184,7 +184,7 @@ extension VideoPlayViewController {
 
 // MARK: - Rx
 extension VideoPlayViewController {
-    func prepareRx() {
+    func setupRx() {
         btnBack.rx.tap
             .subscribe(
                 onNext: { [weak self] in

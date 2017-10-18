@@ -20,10 +20,12 @@ import CSSwiftExtension
 class FeedViewController: UIViewController {
 
     lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: self.view.frame, style: .plain)
-        self.view.addSubview(tableView)
-        
-        tableView.register(VideoTableViewCell.classForCoder(), forCellReuseIdentifier: "VideoTableViewCell")
+        let frame = CGRect(x: 0,
+                           y: 0,
+                           width: self.view.bounds.width,
+                           height: self.view.bounds.height - 49)
+        let tableView = UITableView(frame: frame, style: .plain)
+        tableView.cs_register(VideoTableViewCell.self)
         tableView.rowHeight = kScreenWidth() / 4 * 3
         
         return tableView
@@ -48,7 +50,9 @@ extension FeedViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        prepareForRx()
+        setupUI()
+        
+        setupRx()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,11 +61,15 @@ extension FeedViewController {
         UIApplication.shared.statusBarStyle = .lightContent
     }
     
-    func prepareForRx() {
+    private func setupUI() {
+        view.addSubview(tableView)
+    }
+    
+    private func setupRx() {
         
         // configureCell
         dataSource.configureCell = { (_, tv, indexPath, realmModelVideo) in
-            let cell = tv.dequeueReusableCell(withIdentifier: "VideoTableViewCell", for: indexPath) as! VideoTableViewCell
+            let cell = tv.cs_dequeueReusableCell(forIndexPath: indexPath) as VideoTableViewCell
             cell.backgroundColor = UIColor.cs.random
             cell.realmModelVideo = realmModelVideo
             return cell

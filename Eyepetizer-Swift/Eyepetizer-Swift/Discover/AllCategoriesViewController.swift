@@ -71,8 +71,8 @@ class AllCategoriesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        prepareUI()
-        prepareRx()
+        setupUI()
+        setupRx()
     }
 
     override func didReceiveMemoryWarning() {
@@ -80,14 +80,14 @@ class AllCategoriesViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    private func prepareUI() {
+    private func setupUI() {
         view.backgroundColor = UIColor.white
         
         view.addSubview(topBar)
         view.addSubview(collectionView)
     }
     
-    private func prepareRx() {
+    private func setupRx() {
         
         // configureCell
         dataSource.configureCell = { (_, cv, indexPath, modelCategory) in

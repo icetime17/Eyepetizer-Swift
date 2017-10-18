@@ -73,8 +73,8 @@ class DownloadedVideosViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        prepareUI()
-        prepareRx()
+        setupUI()
+        setupRx()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -88,14 +88,14 @@ class DownloadedVideosViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    private func prepareUI() {
+    private func setupUI() {
         view.backgroundColor = UIColor.white
         
         view.addSubview(topBar)
         view.addSubview(collectionViewLastest)
     }
     
-    private func prepareRx() {
+    private func setupRx() {
         
         // configureCell
         dataSourceLastest.configureCell = { (_, cv, indexPath, realmModelVideo) in

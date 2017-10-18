@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="VideoTableViewCell" customModule="Eyepetizer_Swift" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DTS-9z-2V7">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qeb-UN-pbU">
+                    <rect key="frame" x="0.0" y="150" width="320" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="ha2-Bv-Coe"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="category" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OnO-eS-ucg">
+                    <rect key="frame" x="0.0" y="175" width="320" height="15"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="15" id="bgv-O3-7GI"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="DTS-9z-2V7" secondAttribute="bottom" id="11i-5C-ti7"/>
+                <constraint firstItem="DTS-9z-2V7" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="84Q-e5-ErH"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Qeb-UN-pbU" secondAttribute="trailing" id="Cbi-jE-Pia"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="DTS-9z-2V7" secondAttribute="trailing" id="NU4-Mi-P6M"/>
+                <constraint firstItem="OnO-eS-ucg" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="NZR-yO-CWt"/>
+                <constraint firstItem="Qeb-UN-pbU" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="OOr-Ty-OiH"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="OnO-eS-ucg" secondAttribute="trailing" id="OUP-Eq-ppL"/>
+                <constraint firstItem="Qeb-UN-pbU" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="bMi-Wz-GdO"/>
+                <constraint firstItem="DTS-9z-2V7" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="hjM-wp-MWM"/>
+                <constraint firstItem="OnO-eS-ucg" firstAttribute="top" secondItem="Qeb-UN-pbU" secondAttribute="bottom" constant="5" id="qaB-ao-ag8"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="cover" destination="DTS-9z-2V7" id="AnC-MO-1Qt"/>
+                <outlet property="lbCategory" destination="OnO-eS-ucg" id="5Pa-P5-Zta"/>
+                <outlet property="lbTitle" destination="Qeb-UN-pbU" id="zCO-Ny-ZEQ"/>
+            </connections>
+            <point key="canvasLocation" x="57" y="-202.5"/>
+        </view>
+    </objects>
+</document>

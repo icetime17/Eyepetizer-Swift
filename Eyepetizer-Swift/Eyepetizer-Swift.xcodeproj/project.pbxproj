@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2CD8F6B581A0EC755FA240A4 /* Pods_Eyepetizer_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21FB7D62A973CA7FAE76FEC3 /* Pods_Eyepetizer_Swift.framework */; };
+		A42030E41F96F6F500D93E66 /* VideoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A42030E31F96F6F500D93E66 /* VideoTableViewCell.xib */; };
 		A42601E51F95BE3F00A124B5 /* Global+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42601E41F95BE3F00A124B5 /* Global+Rx.swift */; };
 		A426600D1F5A2DAA002DC120 /* Global+Methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = A426600C1F5A2DAA002DC120 /* Global+Methods.swift */; };
 		A426600F1F5A4C8C002DC120 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = A426600E1F5A4C8C002DC120 /* Global.swift */; };
@@ -52,6 +53,7 @@
 		27348F7BFBE11D20D8E0AAD5 /* Pods-Eyepetizer-Swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Eyepetizer-Swift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Eyepetizer-Swift/Pods-Eyepetizer-Swift.debug.xcconfig"; sourceTree = "<group>"; };
 		480DB8183795335A99E63B52 /* Pods-Eyepetizer-Swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Eyepetizer-Swift.release.xcconfig"; path = "Pods/Target Support Files/Pods-Eyepetizer-Swift/Pods-Eyepetizer-Swift.release.xcconfig"; sourceTree = "<group>"; };
 		66147D3D7CBBCEAA467E1FF3 /* Pods_Eyepetizer_SwiftTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Eyepetizer_SwiftTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A42030E31F96F6F500D93E66 /* VideoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoTableViewCell.xib; sourceTree = "<group>"; };
 		A42601E41F95BE3F00A124B5 /* Global+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Global+Rx.swift"; sourceTree = "<group>"; };
 		A426600C1F5A2DAA002DC120 /* Global+Methods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Global+Methods.swift"; sourceTree = "<group>"; };
 		A426600E1F5A4C8C002DC120 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				A4C57EB31F96EB5900DC0D73 /* VideoTableViewCell.swift */,
+				A42030E31F96F6F500D93E66 /* VideoTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -384,6 +387,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A43F2B4C1E45BCE60096BCB5 /* LaunchScreen.storyboard in Resources */,
+				A42030E41F96F6F500D93E66 /* VideoTableViewCell.xib in Resources */,
 				A43F2B491E45BCE60096BCB5 /* Assets.xcassets in Resources */,
 				A43F2B471E45BCE60096BCB5 /* Main.storyboard in Resources */,
 			);
