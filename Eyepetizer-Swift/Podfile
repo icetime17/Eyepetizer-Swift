@@ -9,7 +9,7 @@ pod 'RealmSwift'
 
 pod 'CSSwiftExtension'
 pod 'Hero'
-
+pod 'DGElasticPullToRefresh'
 
 pod 'RxSwift'
 pod 'RxCocoa'

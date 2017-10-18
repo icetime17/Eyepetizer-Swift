@@ -13,8 +13,10 @@ import RxDataSources
 import Alamofire
 import SwiftyJSON
 import Kingfisher
-import Hero
+
 import CSSwiftExtension
+import Hero
+import DGElasticPullToRefresh
 
 
 class FeedViewController: UIViewController {
@@ -43,10 +45,15 @@ class FeedViewController: UIViewController {
     
     var viewModelVideoList = ViewModelVideoList()
     let dataSource = RxTableViewSectionedReloadDataSource<VideoListSection>()
+    
+    
+    deinit {
+        tableView.dg_removePullToRefresh()
+    }
 }
 
 extension FeedViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -63,9 +70,16 @@ extension FeedViewController {
     
     private func setupUI() {
         view.addSubview(tableView)
+        
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
+        } else {
+            self.automaticallyAdjustsScrollViewInsets = false
+        }
     }
     
     private func setupRx() {
+        viewModelVideoList.delegate = self
         
         // configureCell
         dataSource.configureCell = { (_, tv, indexPath, realmModelVideo) in
@@ -107,7 +121,8 @@ extension FeedViewController {
                 
             }, onError: nil, onCompleted: nil, onDisposed: nil)
             .addDisposableTo(CS_DisposeBag)
-        
+
+        /*
         tableView.rx.contentOffset
             .map { $0.y }
             .subscribe(onNext: { (contentOffset) in
@@ -182,7 +197,16 @@ extension FeedViewController {
                 }
             })
             .addDisposableTo(CS_DisposeBag)
+        */
         
+        let loadingView = DGElasticPullToRefreshLoadingViewCircle()
+        loadingView.tintColor = UIColor(red: 78/255.0, green: 221/255.0, blue: 200/255.0, alpha: 1.0)
+        tableView.dg_addPullToRefreshWithActionHandler({
+//            self.tableView.dg_stopLoading()
+            self.viewModelVideoList.loadMoreVideos()
+        }, loadingView: loadingView)
+        tableView.dg_setPullToRefreshFillColor(UIColor(red: 57/255.0, green: 67/255.0, blue: 89/255.0, alpha: 1.0))
+        tableView.dg_setPullToRefreshBackgroundColor(tableView.backgroundColor!)
     }
 
 }
@@ -197,5 +221,11 @@ extension FeedViewController {
         
         self.isHeroEnabled = true
         self.present(videoPlayVC, animated: true, completion: nil)
+    }
+}
+
+extension FeedViewController: ViewModelVideoListDelegate {
+    func VideoList(viewModel: ViewModelVideoList, isVideoListReloaded: Bool) {
+        self.tableView.dg_stopLoading()
     }
 }

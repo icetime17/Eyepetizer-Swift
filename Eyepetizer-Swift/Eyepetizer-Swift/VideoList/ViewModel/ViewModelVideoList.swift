@@ -28,8 +28,14 @@ extension VideoListSection: SectionModelType {
 }
 
 
+protocol ViewModelVideoListDelegate: class {
+    func VideoList(viewModel: ViewModelVideoList, isVideoListReloaded: Bool)
+}
+
 
 class ViewModelVideoList {
+    weak var delegate: ViewModelVideoListDelegate?
+    
     let videos = Variable<[RealmModelVideo]>([])
     var pageIndex = 1
     
@@ -115,5 +121,56 @@ extension ViewModelVideoList: CSRxViewModelType {
         }).disposed(by: self.CS_DisposeBag)
         
         return output
+    }
+}
+
+extension ViewModelVideoList {
+    func loadMoreVideos() {
+        let parameters: [String: AnyObject] = [
+            "num": 4 as AnyObject,
+            ]
+        Alamofire.request(API.dailyFeed, parameters: parameters).responseJSON(completionHandler: { (response) in
+            switch response.result {
+            case .success(let value):
+                
+                var videos = [RealmModelVideo]()
+                
+                let json = JSON(value)
+                let issueList = json["issueList"].arrayValue
+                for issue in issueList {
+                    let itemList = issue["itemList"].arrayValue
+                    for item in itemList {
+                        let type                = item["type"].stringValue
+                        if type != "video" {
+                            continue
+                        }
+                        
+                        let data                = item["data"]
+                        
+                        let video               = RealmModelVideo()
+                        video.id                = data["id"].intValue
+                        video.title             = data["title"].stringValue
+                        video.playUrl           = data["playUrl"].stringValue
+                        video.author            = data["author"].stringValue
+                        video.coverForFeed      = data["cover"]["feed"].stringValue
+                        video.videoDescription  = data["description"].stringValue
+                        video.category          = data["category"].stringValue
+                        video.duration          = data["duration"].intValue
+                        
+                        videos.append(video)
+                    }
+                }
+                cs_print("load more videos : \(videos.count)")
+                
+                DispatchQueue.cs.main {
+                    self.videos.value = videos
+                    self.delegate?.VideoList(viewModel: self, isVideoListReloaded: true)
+                }
+                
+            case .failure(let error):
+                cs_print(error)
+                self.delegate?.VideoList(viewModel: self, isVideoListReloaded: false)
+            }
+        })
     }
 }
