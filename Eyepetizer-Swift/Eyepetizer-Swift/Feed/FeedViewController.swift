@@ -10,15 +10,17 @@ import UIKit
 import RxSwift
 import RxDataSources
 
+import Alamofire
+import SwiftyJSON
 import Kingfisher
 import Hero
+import CSSwiftExtension
 
 
 class FeedViewController: UIViewController {
 
     lazy var tableView: UITableView = {
-        let frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height - 49)
-        let tableView = UITableView(frame: frame, style: .plain)
+        let tableView = UITableView(frame: self.view.frame, style: .plain)
         self.view.addSubview(tableView)
         
         tableView.register(VideoTableViewCell.classForCoder(), forCellReuseIdentifier: "VideoTableViewCell")
@@ -30,10 +32,15 @@ class FeedViewController: UIViewController {
     
     let CS_DisposeBag = DisposeBag()
     
-    let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, RealmModelVideo>>()
+    var isVideoListLoading = false
     
+    /*
     var viewModel = ViewModelVideo()
+    let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, RealmModelVideo>>()
+     */
     
+    var viewModelVideoList = ViewModelVideoList()
+    let dataSource = RxTableViewSectionedReloadDataSource<VideoListSection>()
 }
 
 extension FeedViewController {
@@ -61,9 +68,21 @@ extension FeedViewController {
         }
         
         // dataSource
+        /*
         viewModel.getVideoList(type: .dailyFeed)
             .bindTo(tableView.rx.items(dataSource: dataSource))
             .addDisposableTo(CS_DisposeBag)
+        */
+        
+        let videoListInput = ViewModelVideoList.VideoListInput(type: .dailyFeed)
+        let videoListOutput = viewModelVideoList.tranform(input: videoListInput)
+        videoListOutput.sections
+            .asDriver()
+            .drive(tableView.rx.items(dataSource: dataSource))
+            .addDisposableTo(CS_DisposeBag)
+        
+        // 因requestCommand的next事件会触发网络请求
+        videoListOutput.requestCommand.onNext(true)
         
         
         // select
@@ -91,11 +110,67 @@ extension FeedViewController {
                 }
                 
                 if contentOffset < -100 {
-                    print("pull to refresh")
-                    // TODO:
-                    self.viewModel.videos.append(self.viewModel.videos.first!)
-                    
-                    self.viewModel.section = [SectionModel(model: "section", items: self.viewModel.videos)]
+                    if self.isVideoListLoading == false {
+                        print("pull to refresh")
+                        self.isVideoListLoading = true
+                        // TODO: How to load more videos?
+                        /*
+                        cs_print("videos count : \(self.viewModel.videos.count)")
+                        self.viewModel.videos.append(contentsOf: self.viewModel.videos)
+                        cs_print("videos count : \(self.viewModel.videos.count)")
+                         */
+                        
+                        
+                        let parameters: [String: AnyObject] = [
+                            "num": 4 as AnyObject,
+                            ]
+                        Alamofire.request(API.dailyFeed, parameters: parameters).responseJSON(completionHandler: { (response) in
+                            switch response.result {
+                            case .success(let value):
+                                
+                                var videos = [RealmModelVideo]()
+                                
+                                let json = JSON(value)
+                                let issueList = json["issueList"].arrayValue
+                                for issue in issueList {
+                                    let itemList = issue["itemList"].arrayValue
+                                    for item in itemList {
+                                        let type                = item["type"].stringValue
+                                        if type != "video" {
+                                            continue
+                                        }
+                                        
+                                        let data                = item["data"]
+                                        
+                                        let video               = RealmModelVideo()
+                                        video.id                = data["id"].intValue
+                                        video.title             = data["title"].stringValue
+                                        video.playUrl           = data["playUrl"].stringValue
+                                        video.author            = data["author"].stringValue
+                                        video.coverForFeed      = data["cover"]["feed"].stringValue
+                                        video.videoDescription  = data["description"].stringValue
+                                        video.category          = data["category"].stringValue
+                                        video.duration          = data["duration"].intValue
+                                        
+                                        videos.append(video)
+                                    }
+                                }
+                                cs_print("getLastestVideoList : \(videos.count)")
+                                
+                                DispatchQueue.cs.main {
+//                                    var oldDatas = self.viewModelVideoList.videos.value
+                                    //                        self.viewModelVideoList.videos.value = oldDatas + [oldDatas.first!]
+                                    
+//                                    self.viewModelVideoList.videos.value.append(contentsOf: [oldDatas.first!])
+                                    
+                                    self.viewModelVideoList.videos.value = videos
+                                }
+                                
+                            case .failure(let error):
+                                cs_print(error)
+                            }
+                        })
+                    }
                 }
             })
             .addDisposableTo(CS_DisposeBag)
