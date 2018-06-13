@@ -10,8 +10,32 @@ import UIKit
 
 class VideoTableViewCell: UITableViewCell {
     @IBOutlet weak var cover: UIImageView!
+    
+    @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var lbTitle: UILabel!
     @IBOutlet weak var lbCategory: UILabel!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        setupUI()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        setupUI()
+    }
+    
+    func setupUI() {
+        bgView.cs.setCornerRadius(radius: 2)
+        bgView.alpha = 0.6
+        
+        let blurView = UIVisualEffectView(frame: bgView.bounds)
+        bgView.addSubview(blurView)
+        
+        blurView.effect = UIBlurEffect(style: .dark)
+    }
     
     var realmModelVideo: RealmModelVideo! {
         willSet {

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,8 +19,15 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DTS-9z-2V7">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
                 </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="58C-GJ-FT4">
+                    <rect key="frame" x="20" y="145" width="280" height="50"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="7sq-8z-HWq"/>
+                    </constraints>
+                </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qeb-UN-pbU">
-                    <rect key="frame" x="0.0" y="150" width="320" height="20"/>
+                    <rect key="frame" x="20" y="150" width="280" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="ha2-Bv-Coe"/>
                     </constraints>
@@ -29,7 +36,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="category" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OnO-eS-ucg">
-                    <rect key="frame" x="0.0" y="175" width="320" height="15"/>
+                    <rect key="frame" x="20" y="175" width="280" height="15"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="15" id="bgv-O3-7GI"/>
                     </constraints>
@@ -41,21 +48,25 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="DTS-9z-2V7" secondAttribute="bottom" id="11i-5C-ti7"/>
+                <constraint firstItem="Qeb-UN-pbU" firstAttribute="centerX" secondItem="58C-GJ-FT4" secondAttribute="centerX" id="3BI-z6-FOf"/>
+                <constraint firstItem="58C-GJ-FT4" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="6da-kh-69h"/>
                 <constraint firstItem="DTS-9z-2V7" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="84Q-e5-ErH"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Qeb-UN-pbU" secondAttribute="trailing" id="Cbi-jE-Pia"/>
+                <constraint firstItem="OnO-eS-ucg" firstAttribute="width" secondItem="58C-GJ-FT4" secondAttribute="width" id="88U-vW-ARi"/>
+                <constraint firstItem="Qeb-UN-pbU" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="D6h-cH-x1k"/>
+                <constraint firstItem="Qeb-UN-pbU" firstAttribute="width" secondItem="58C-GJ-FT4" secondAttribute="width" id="Jfb-S6-BuL"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="DTS-9z-2V7" secondAttribute="trailing" id="NU4-Mi-P6M"/>
-                <constraint firstItem="OnO-eS-ucg" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="NZR-yO-CWt"/>
-                <constraint firstItem="Qeb-UN-pbU" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="OOr-Ty-OiH"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="OnO-eS-ucg" secondAttribute="trailing" id="OUP-Eq-ppL"/>
-                <constraint firstItem="Qeb-UN-pbU" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="bMi-Wz-GdO"/>
+                <constraint firstItem="58C-GJ-FT4" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" constant="10" id="PCM-aH-wg7"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="58C-GJ-FT4" secondAttribute="trailing" constant="20" id="cVF-jf-wj4"/>
                 <constraint firstItem="DTS-9z-2V7" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="hjM-wp-MWM"/>
                 <constraint firstItem="OnO-eS-ucg" firstAttribute="top" secondItem="Qeb-UN-pbU" secondAttribute="bottom" constant="5" id="qaB-ao-ag8"/>
+                <constraint firstItem="OnO-eS-ucg" firstAttribute="centerX" secondItem="Qeb-UN-pbU" secondAttribute="centerX" id="xGU-dz-JDk"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
+                <outlet property="bgView" destination="58C-GJ-FT4" id="Opz-H1-N6D"/>
                 <outlet property="cover" destination="DTS-9z-2V7" id="AnC-MO-1Qt"/>
                 <outlet property="lbCategory" destination="OnO-eS-ucg" id="5Pa-P5-Zta"/>
                 <outlet property="lbTitle" destination="Qeb-UN-pbU" id="zCO-Ny-ZEQ"/>

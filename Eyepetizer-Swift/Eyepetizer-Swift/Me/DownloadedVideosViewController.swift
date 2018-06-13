@@ -18,16 +18,9 @@ class DownloadedVideosViewController: UIViewController {
     
     var lbTitle: UILabel!
     lazy var topBar: UIView = {
-        let v = UIView(frame: CGRect(x: 0, y: 0, width: self.view.cs.width, height: 50))
+        let v = UIView(frame: CGRect(x: 0, y: 0, width: self.view.cs.width, height: 100))
         
-        self.lbTitle = UILabel(frame: CGRect(x: 0, y: 10, width: self.view.cs.width, height: 40))
-        self.lbTitle.text = "分类"
-        self.lbTitle.textColor = UIColor.black
-        self.lbTitle.textAlignment = .center
-        self.lbTitle.font = UIFont.boldSystemFont(ofSize: 20)
-        v.addSubview(self.lbTitle)
-        
-        let btnLeft = UIButton(frame: CGRect(x: 0, y: 10, width: 100, height: 40))
+        let btnLeft = UIButton(frame: CGRect(x: 20, y: 20, width: 40, height: 40))
         btnLeft.setTitle("返回", for: .normal)
         btnLeft.setTitleColor(UIColor.darkGray, for: .normal)
         v.addSubview(btnLeft)
@@ -40,6 +33,12 @@ class DownloadedVideosViewController: UIViewController {
             )
             .addDisposableTo(self.CS_DisposeBag)
         
+        self.lbTitle = UILabel(frame: CGRect(x: 20, y: 60, width: self.view.cs.width, height: 40))
+        self.lbTitle.textColor = UIColor.black
+        self.lbTitle.textAlignment = .left
+        self.lbTitle.font = UIFont.boldSystemFont(ofSize: 30)
+        v.addSubview(self.lbTitle)
+        
         return v
     }()
     
@@ -48,7 +47,10 @@ class DownloadedVideosViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         
-        let cv = UICollectionView(frame: CGRect(x: 0, y: self.topBar.cs.bottom, width: self.view.cs.width, height: self.view.cs.height - self.topBar.cs.bottom), collectionViewLayout: layout)
+        let cv = UICollectionView(frame: CGRect(x: 0,
+                                                y: self.topBar.cs.bottom + 10,
+                                                width: self.view.cs.width,
+                                                height: self.view.cs.height - self.topBar.cs.bottom), collectionViewLayout: layout)
         cv.backgroundColor = UIColor.white
         
         let width = (cv.cs.width - 2) / 2
@@ -80,7 +82,7 @@ class DownloadedVideosViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        lbTitle.text = "#" + modelCategory.name
+        lbTitle.text = modelCategory.name
     }
     
     override func didReceiveMemoryWarning() {

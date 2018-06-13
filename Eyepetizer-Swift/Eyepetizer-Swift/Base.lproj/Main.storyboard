@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="obK-ey-6RY">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="obK-ey-6RY">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -352,6 +352,8 @@
                         <outlet property="sliderPlayProgress" destination="3JD-KL-RBC" id="mQ8-x5-Y3X"/>
                         <outlet property="textViewDescription" destination="qxE-pW-mM6" id="QEk-d9-q3o"/>
                         <outlet property="videoCover" destination="RTk-LG-a5V" id="pjy-VP-xNM"/>
+                        <outlet property="viewContainerDesc" destination="q97-28-opv" id="oma-Vh-HR7"/>
+                        <outlet property="viewContainerPlayer" destination="VYn-2i-x8k" id="bJi-FG-cgO"/>
                         <outlet property="viewToolBar" destination="TPX-zw-Fzk" id="0Sx-9R-XgF"/>
                         <outlet property="viewVideoNetwork" destination="a9q-yv-t1m" id="Vgo-6L-xw1"/>
                         <outlet property="viewVideoNetworkOperation" destination="dvD-Nv-1vD" id="gAk-gw-uC0"/>

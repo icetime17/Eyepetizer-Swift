@@ -34,6 +34,17 @@ class VideoCollectionViewCell: UICollectionViewCell {
         return iv
     }()
     
+    lazy var bgView: UIView = {
+        let v = UIView(frame: CGRect(x: 10,
+                                     y: (self.cs.height - 50) / 2,
+                                     width: self.cs.width - 10 * 2,
+                                     height: 50))
+        v.backgroundColor = UIColor.black
+        self.addSubview(v)
+        
+        return v
+    }()
+    
     lazy var lbTitle: UILabel = {
         let lb = UILabel(frame: CGRect(x: 0, y: (self.cs.height - 30) / 2, width: self.cs.width, height: 30))
         lb.textAlignment = .center
@@ -51,5 +62,30 @@ class VideoCollectionViewCell: UICollectionViewCell {
         self.addSubview(lb)
         return lb
     }()
-
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        setupUI()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        setupUI()
+    }
+    
+    func setupUI() {
+        bgView.cs.setCornerRadius(radius: 2)
+        bgView.alpha = 0.6
+        
+        let blurView = UIVisualEffectView(frame: bgView.bounds)
+        bgView.addSubview(blurView)
+        
+        blurView.effect = UIBlurEffect(style: .dark)
+    }
 }

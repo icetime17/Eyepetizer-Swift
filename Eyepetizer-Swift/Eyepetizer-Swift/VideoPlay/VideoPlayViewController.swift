@@ -20,14 +20,19 @@ class VideoPlayViewController: UIViewController {
     var realmModelVideo: RealmModelVideo!
     
     var avPlayer: AVPlayer!
+    var avPlayerLayer: AVPlayerLayer!
     var avPlayerItem: AVPlayerItem!
+    var timeObserverAVPlayer: Any?
     
     var isVideoPlaying = false
     var isVideoOperationViewShowing = true
-    
+    var isFullScreenPlaying = false
     
     @IBOutlet weak var btnBack: UIButton!
     
+    // video
+    
+    @IBOutlet weak var viewContainerPlayer: UIView!
     @IBOutlet weak var viewVideoNetwork: UIView!
     @IBOutlet weak var videoCover: UIImageView!
     
@@ -49,6 +54,7 @@ class VideoPlayViewController: UIViewController {
     
     @IBOutlet weak var lbPlayProgress: UILabel!
     
+    @IBOutlet weak var viewContainerDesc: UIView!
     @IBOutlet weak var lbTitle: UILabel!
     @IBOutlet weak var lbCategory: UILabel!
     @IBOutlet weak var textViewDescription: UITextView!
@@ -122,9 +128,7 @@ extension VideoPlayViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        if avPlayer != nil {
-            avPlayer.pause()
-        }
+        actionStopPlaying()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -137,7 +141,6 @@ extension VideoPlayViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
 }
 
 // MARK: - Notification
@@ -191,7 +194,6 @@ extension VideoPlayViewController {
         btnBack.rx.tap
             .subscribe(
                 onNext: { [weak self] in
-                    self?.actionStopPlaying()
                     self?.dismiss(animated: true, completion: nil)
                 }
             )
@@ -313,9 +315,13 @@ extension VideoPlayViewController {
     fileprivate func actionStopPlaying() {
         if avPlayer != nil {
             avPlayer.pause()
+            avPlayer.removeTimeObserver(self.timeObserverAVPlayer)
             avPlayer = nil
-            
+        }
+        
+        if avPlayerItem != nil {
             avPlayerItem.removeObserver(self, forKeyPath: "loadedTimeRanges", context: nil)
+            avPlayerItem = nil
         }
     }
     
@@ -373,6 +379,39 @@ extension VideoPlayViewController {
     
     func actionFullScreen() {
         print("full screen")
+        viewContainerDesc.isHidden = true
+        if isFullScreenPlaying == false {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.viewContainerPlayer.backgroundColor = .green
+                self.viewVideoNetwork.backgroundColor = .red
+                
+                self.viewContainerPlayer.transform = CGAffineTransform(rotationAngle: (CGFloat)(Double.pi / 2))
+                self.viewContainerPlayer.frame = CGRect(x: 0, y: 0, width: self.view.frame.height, height: self.view.frame.width)
+                
+                //            self.viewVideoNetwork.transform = CGAffineTransform(rotationAngle: (CGFloat)(Double.pi / 2))
+                self.viewVideoNetwork.frame = CGRect(x: 0, y: 0, width: self.view.frame.height, height: self.view.frame.width)
+                self.avPlayerLayer.frame = CGRect(x: 0, y: 0, width: self.view.frame.height, height: self.view.frame.width)
+                self.viewVideoNetworkOperation.frame = CGRect(x: 0, y: 0, width: self.view.frame.height, height: self.view.frame.width)
+            }, completion: { (isFinished) in
+                self.viewVideoNetworkOperation.layoutIfNeeded()
+            })
+        } else {
+            UIView.animate(withDuration: 0.3, animations: {
+                let width = self.view.frame.width
+                let height = width / 4 * 3
+                self.viewContainerPlayer.transform = CGAffineTransform.identity
+                self.viewContainerPlayer.frame = CGRect(x: 0, y: 0, width: width, height: height)
+                
+                //            self.viewVideoNetwork.transform = CGAffineTransform(rotationAngle: (CGFloat)(Double.pi / 2))
+                self.viewVideoNetwork.frame = CGRect(x: 0, y: 0, width: width, height: height)
+                self.avPlayerLayer.frame = CGRect(x: 0, y: 0, width: width, height: height)
+                
+                self.viewVideoNetworkOperation.frame = CGRect(x: 0, y: 0, width: width, height: height)
+            }, completion: { (isFinished) in
+                self.viewVideoNetworkOperation.layoutIfNeeded()
+            })
+        }
+        isFullScreenPlaying = !isFullScreenPlaying
     }
 }
 
@@ -401,7 +440,7 @@ extension VideoPlayViewController {
         avPlayer = AVPlayer(playerItem: avPlayerItem)
         
         // monitor video playing progress
-        avPlayer.addPeriodicTimeObserver(forInterval: CMTime(value: 1, timescale: 1),
+        timeObserverAVPlayer = avPlayer.addPeriodicTimeObserver(forInterval: CMTime(value: 1, timescale: 1),
                                          queue: DispatchQueue.main,
                                          using: { [weak self] (time) in
             guard let strongSelf = self else { return }
@@ -427,7 +466,7 @@ extension VideoPlayViewController {
         })
         
         // AVPlayerLayer
-        let avPlayerLayer = AVPlayerLayer(player: avPlayer)
+        avPlayerLayer = AVPlayerLayer(player: avPlayer)
         avPlayerLayer.frame = viewVideoNetwork.bounds
         avPlayerLayer.backgroundColor = UIColor.black.cgColor
         avPlayerLayer.videoGravity = AVLayerVideoGravityResize

@@ -57,6 +57,7 @@ extension ViewModelVideoList: CSRxViewModelType {
         let sections: Driver<[VideoListSection]>
         
         // 外界通过该属性告诉viewModel加载数据（传入的值是为了标志是否重新加载）
+        // PublishObject即可以作为Observable，也可以作为Observer。
         let requestCommand = PublishSubject<Bool>()
         
         init(sections: Driver<[VideoListSection]>) {
